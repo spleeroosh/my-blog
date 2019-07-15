@@ -1,0 +1,13 @@
+.navbar {
+  background-color: #E74C3C;
+}
+
+.nav-link:hover {
+  color: black !important;
+  border-bottom: 1px solid black;
+}
+
+.nav-link:focus {
+  color: black !important;
+}
+
