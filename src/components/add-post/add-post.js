@@ -5,6 +5,9 @@ import { withMyBlogService } from './../hoc-helpers';
 import { connect } from 'react-redux';
 import { addPost } from './../../actions/index';
 
+import TitleForm from './title-form';
+import PostForm from './post-form';
+
 class AddPost extends Component {
 
   state = {
@@ -36,8 +39,8 @@ class AddPost extends Component {
   addPost = (e) => {
     e.preventDefault();
     const id = uuid();
-    const title = this.state.title;
-    const post = this.state.post;
+    const { title, post } = this.state;
+    const { posts, dispatch, myBlogService } = this.props;
 
     const newPost = {
       id,
@@ -45,7 +48,7 @@ class AddPost extends Component {
       post
     };
 
-    const oldPosts = this.props.posts.map((post) => {
+    const oldPosts = posts.map((post) => {
       return { ...post };
     });
 
@@ -54,40 +57,26 @@ class AddPost extends Component {
       newPost
     ];
     
-    this.props.dispatch(addPost(newPosts));
-    this.props.myBlogService.addPost(id, title, post);
+    dispatch(addPost(newPosts));
+    myBlogService.addPost(id, title, post);
     this.clearForm();
   };
 
   render() {
+
+    const { title, post } = this.state;
+    const { onTitleChange, addPost, onPostChange } = this;
+
     return (
       <form action="submit" className="container">
-      <fieldset>
-        <div className="form-group">
-          <label className="col-form-label col-form-label-lg" htmlFor="titleForm">Название статьи</label>
-          <input className="form-control form-control-lg" 
-                 type="text" 
-                 placeholder="Введите название статьи" 
-                 value={this.state.title}
-                 onChange={this.onTitleChange} 
-                 id="titleForm"/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="postForm" 
-                 className="col-form-label col-form-label-lg">Текст для статьи</label>
-          <textarea className="form-control form-control-lg" 
-                    id="postForm" 
-                    rows="7"
-                    placeholder="Введите текст статьи" 
-                    value={this.state.post}
-                    onChange={this.onPostChange}>
-          </textarea>
-        </div>
-      </fieldset>
-      <button type="button" className="btn btn-primary"
-              onClick={this.addPost}>+
-      </button>
-    </form>
+        <fieldset>
+          <TitleForm title={title} onTitleChange={onTitleChange} />
+          <PostForm post={post} onPostChange={onPostChange} />
+        </fieldset>
+        <button type="button" className="btn btn-primary"
+                onClick={addPost}>+
+        </button>
+      </form>
     );
   };
 };
@@ -101,7 +90,7 @@ const mapDispatchToProps = ( dispatch ) => {
 const mapStateToProps = ( { posts } ) => {
   return {
     posts
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withMyBlogService()(AddPost));
