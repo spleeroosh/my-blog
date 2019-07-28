@@ -8,10 +8,10 @@ import Post from './post';
 const BlogPost = ({data, onDeletePost}) => {
   
   return (
-    <section className="container bg-dark posts">
+    <section className="container bg-secondary posts">
       {data.map((post) => {
         return (
-          <Post newPost={post} onDeletePost={onDeletePost} />
+          <Post newPost={post} onDeletePost={onDeletePost} key={post['id']}/>
         );
       })}
       <AddPost />

@@ -7,16 +7,19 @@ import { db } from './../../firebase';
 const withData = (Wrapped, getData) => {
   return connect(mapStateToProps, mapDispatchToProps)(
     class extends Component {
-  
-      componentDidMount() {
+      
+      componentWillMount() {
         getData().then((data) => {
           this.props.dispatch(postsLoaded(data));
         });
       };
 
       onDeletePost = (id) => {
+
+        const { posts, dispatch } = this.props;
         let removedPost = {};
-        const oldPosts = this.props.posts.map((post) => {
+
+        const oldPosts = posts.map((post) => {
           return { ...post };
         });
 
@@ -29,7 +32,7 @@ const withData = (Wrapped, getData) => {
           }
         });
         
-        this.props.dispatch(removePost(newPosts));
+        dispatch(removePost(newPosts));
 
         db.collection("posts").doc(removedPost['id']).delete().then(() => {
           console.log('deleted');

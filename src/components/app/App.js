@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Header from '../header';
 import Counter from '../counter';
 import BlogPost from './../blog-post';
+import LogInForm from './../log-in-form';
 
 import { 
   withMyBlogService,
@@ -21,6 +22,7 @@ const App = ({myBlogService}) => {
         <Switch>
           <Route path='/counter' component={Counter} />
           <Route path='/blog' component={withData(BlogPost, myBlogService.getPosts)} />
+          <Route path='/login' component={LogInForm} />
         </Switch>
       </main>
     </React.Fragment>

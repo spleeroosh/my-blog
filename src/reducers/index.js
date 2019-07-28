@@ -1,6 +1,9 @@
 const initState = {
   count: 0,
-  posts: []
+  posts: [],
+  isLogin: true,
+  password: '',
+  email: ''
 }
 const reducer = (state = initState, action) => {
   switch (action.type) {

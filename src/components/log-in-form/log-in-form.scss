@@ -1,0 +1,10 @@
+.log-in {
+  display: flex;
+  justify-content: center;
+  
+    &__card {
+      width: 25rem;
+      height: fit-content;
+    }
+}
+

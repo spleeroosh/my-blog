@@ -24,7 +24,7 @@ class AddPost extends Component {
 
   onPostChange = (e) => {
     this.setState({
-      post: e.target.value
+      post:  e.target.value
     });
   };
 

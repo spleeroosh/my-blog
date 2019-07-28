@@ -5,10 +5,10 @@ import './nav-bar.css';
 
 const NavBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-active">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <ul className="navbar-nav mr-auto">
-        <li className="nav-item">
-          <Link className="nav-link" to='/about'>Обо мне</Link>
+        <li className="nav-item active-warning">
+          <Link className="nav-link" to='/login'>Вход</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to='/news'>Новости</Link>

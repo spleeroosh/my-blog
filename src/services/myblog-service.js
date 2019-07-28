@@ -11,9 +11,7 @@ export default class MyBlogService {
 
         return data;
       });
-
       return data;
-  
   };
 
   addPost = (id, title, post) => {

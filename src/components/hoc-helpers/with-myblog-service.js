@@ -18,3 +18,4 @@ const withMyBlogService = () => (Wrapped) => {
 };
 
 export default withMyBlogService;
+
