@@ -8,7 +8,7 @@ export default class MyBlogService {
         const data = querySnapshot.docs.map(doc => {
           return doc.data();
         });
-
+        console.log(data);
         return data;
       });
       return data;

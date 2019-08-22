@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, KeyboardEvent } from 'react';
 import './add-post.css';
 import uuid from 'uuid';
 import { withMyBlogService } from './../hoc-helpers';
@@ -15,6 +15,8 @@ class AddPost extends Component {
     title: '',
     post: ''
   }
+
+  textArea = React.createRef()
 
   onTitleChange = (e) => {
     this.setState({
@@ -41,11 +43,13 @@ class AddPost extends Component {
     const id = uuid();
     const { title, post } = this.state;
     const { posts, dispatch, myBlogService } = this.props;
-
+    const formattedTitle = title.replace(/ /g, '&nbsp;');
+    const formattedPost = post.replace(/ /g, '&nbsp;').replace(/\n/g, "<br />").replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');  
+    console.log(formattedTitle, formattedPost);
     const newPost = {
       id,
-      title,
-      post
+      title: formattedTitle,
+      post: formattedPost
     };
 
     const oldPosts = posts.map((post) => {
@@ -53,25 +57,40 @@ class AddPost extends Component {
     });
 
     const newPosts = [
-      ...oldPosts,
-      newPost
+      newPost,
+      ...oldPosts      
     ];
     
     dispatch(addPost(newPosts));
-    myBlogService.addPost(id, title, post);
+    myBlogService.addPost(id, formattedTitle, formattedPost);
     this.clearForm();
+  };
+
+  onTabDown = (e: KeyboardEvent) => {
+    
+    if (e.keyCode === 9) {
+      e.preventDefault();
+      let value = this.state.post;
+      let start = this.textArea.current.selectionStart;
+      let end = this.textArea.current.selectionEnd;
+      this.setState(() => {
+        return {
+          post: value.substring(0, start) + '\t' + value.substring(end)
+        };
+      });
+    };
   };
 
   render() {
 
     const { title, post } = this.state;
-    const { onTitleChange, addPost, onPostChange } = this;
+    const { onTitleChange, addPost, onPostChange, onTabDown, textArea } = this;
 
     return (
       <form action="submit" className="container">
         <fieldset>
           <TitleForm title={title} onTitleChange={onTitleChange} />
-          <PostForm post={post} onPostChange={onPostChange} />
+          <PostForm post={post} onPostChange={onPostChange} onTabDown={onTabDown} textArea={textArea}/>
         </fieldset>
         <button type="button" className="btn btn-primary"
                 onClick={addPost}>+
