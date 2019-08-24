@@ -1,4 +1,4 @@
-import React, { Component, KeyboardEvent } from 'react';
+import React, { Component } from 'react';
 import './add-post.css';
 import uuid from 'uuid';
 import { withMyBlogService } from './../hoc-helpers';
@@ -43,9 +43,8 @@ class AddPost extends Component {
     const id = uuid();
     const { title, post } = this.state;
     const { posts, dispatch, myBlogService } = this.props;
-    const formattedTitle = title.replace(/ /g, '&nbsp;');
-    const formattedPost = post.replace(/ /g, '&nbsp;').replace(/\n/g, "<br />").replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');  
-    console.log(formattedTitle, formattedPost);
+    const { formattedTitle, formattedPost } = this.formattedText(title, post);
+
     const newPost = {
       id,
       title: formattedTitle,
@@ -66,7 +65,16 @@ class AddPost extends Component {
     this.clearForm();
   };
 
-  onTabDown = (e: KeyboardEvent) => {
+  formattedText = (title, post) => {
+    const formattedTitle = title.replace(/ /g, '&nbsp;');
+    const formattedPost = post.replace(/ /g, '&nbsp;').replace(/\n/g, "<br />").replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
+    return {
+      formattedTitle,
+      formattedPost
+    }
+  };
+
+  onTabDown = (e) => {
     
     if (e.keyCode === 9) {
       e.preventDefault();

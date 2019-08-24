@@ -3,16 +3,16 @@ import { Route, Switch } from 'react-router-dom';
 
 import Header from '../header';
 import Counter from '../counter';
-import BlogPost from './../blog-post';
-import LogInForm from './../log-in-form';
+import BlogPost from '../blog-post';
+import LogInForm from '../log-in-form';
 
 import { 
   withMyBlogService,
   withData
-} from './../hoc-helpers';
+} from '../hoc-helpers';
 
 
-import './App.css';
+import './app.scss';
 
 const App = ({myBlogService}) => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './blog-post.css';
+import './blog-post.scss';
 
 import AddPost from './../add-post'
 import Post from './post';
@@ -8,14 +8,16 @@ import Post from './post';
 const BlogPost = ({data, onDeletePost}) => {
   
   return (
-    <section className="container bg-secondary posts">
-      {data.map((post) => {
-        return (
-          <Post newPost={post} onDeletePost={onDeletePost} key={post['id']}/>
-        );
-      })}
+    <React.Fragment>
+      <section className="container row posts">
+        {data.map((post) => {
+          return (
+            <Post newPost={post} onDeletePost={onDeletePost} key={post['id']}/>
+          );
+        })}
+      </section>
       <AddPost />
-    </section>
+    </React.Fragment>    
   );
 };
 
