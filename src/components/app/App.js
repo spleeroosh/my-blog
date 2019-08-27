@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Header from '../header';
 import Counter from '../counter';
-import BlogPost from '../blog-post';
+import Posts from '../posts';
 import LogInForm from '../log-in-form';
 
 import { 
@@ -21,7 +21,7 @@ const App = ({myBlogService}) => {
       <main>
         <Switch>
           <Route path='/counter' component={Counter} />
-          <Route path='/blog' component={withData(BlogPost, myBlogService.getPosts)} />
+          <Route path='/blog' component={withData(Posts, myBlogService.getPosts)} />
           <Route path='/login' component={LogInForm} />
         </Switch>
       </main>
