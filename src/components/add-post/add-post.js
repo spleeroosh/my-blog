@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './add-post.css';
 import uuid from 'uuid';
-import { withMyBlogService } from './../hoc-helpers';
+
 import { connect } from 'react-redux';
 import { addPost } from './../../actions/index';
 
@@ -42,7 +42,7 @@ class AddPost extends Component {
     e.preventDefault();
     const id = uuid();
     const { title, post } = this.state;
-    const { posts, dispatch, myBlogService } = this.props;
+    const { posts, dispatch } = this.props;
     const { formattedTitle, formattedPost } = this.formattedText(title, post);
 
     const newPost = {
@@ -60,8 +60,8 @@ class AddPost extends Component {
       ...oldPosts      
     ];
     
-    dispatch(addPost(newPosts));
-    myBlogService.addPost(id, formattedTitle, formattedPost);
+    dispatch(addPost(newPosts, newPost));
+    //myBlogService.addPost(id, formattedTitle, formattedPost);
     this.clearForm();
   };
 
@@ -120,4 +120,4 @@ const mapStateToProps = ( { posts } ) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withMyBlogService()(AddPost));
+export default connect(mapStateToProps, mapDispatchToProps)(AddPost);

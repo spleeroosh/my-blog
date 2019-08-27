@@ -1,11 +1,16 @@
 const initState = {
   count: 0,
-  posts: [],
+  posts: [{
+    id: 1,
+    title: 'sss',
+    post: 'sss'
+  }],
   isLogin: true,
   password: '',
   email: ''
-}
-const reducer = (state = initState, action) => {
+};
+
+const projectReducer = (state = initState, action) => {
   switch (action.type) {
     case 'INC':
       return state = {
@@ -42,4 +47,4 @@ const reducer = (state = initState, action) => {
   }
 };
 
-export default reducer;
+export default projectReducer;

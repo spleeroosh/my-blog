@@ -6,22 +6,16 @@ import Counter from '../counter';
 import Posts from '../posts';
 import LogInForm from '../log-in-form';
 
-import { 
-  withMyBlogService,
-  withData
-} from '../hoc-helpers';
-
-
 import './app.scss';
 
-const App = ({myBlogService}) => {
+const App = () => {
   return (
     <React.Fragment>
       <Header />
       <main>
         <Switch>
           <Route path='/counter' component={Counter} />
-          <Route path='/blog' component={withData(Posts, myBlogService.getPosts)} />
+          <Route path='/blog' component={Posts} />
           <Route path='/login' component={LogInForm} />
         </Switch>
       </main>
@@ -29,4 +23,4 @@ const App = ({myBlogService}) => {
   );
 };
 
-export default withMyBlogService()(App);
+export default App;
