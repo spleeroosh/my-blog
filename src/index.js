@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+//react-redux-firebase
+import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
+import { reduxFirestore, getFirestore } from 'redux-firestore';
+
 import App from './components/app';
 import MyBlogService from './services/myblog-service';
 import { MyBlogServiceProvider } from './components/myblog-service-context';
