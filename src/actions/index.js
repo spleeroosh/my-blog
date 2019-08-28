@@ -11,12 +11,9 @@ const dec = () => {
 };
 
 const postsLoaded = (newPosts) => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
-    //async operations with dispatch
-    dispatch({
-      type: 'POSTS_LOADED',
-      payload: newPosts
-    });
+  return {
+    type: 'POSTS_LOADED',
+    payload: newPosts
   }
 };
 
@@ -27,12 +24,11 @@ const removePost = (newPosts) => {
   };
 };
 
-const addPost = (newPosts, newPost) => {
-  return (dispatch, getState, {getFirebase,getFirestore}) => {
+const addPost = (newPosts, newPost, firestore) => {
+  return (dispatch, getState) => {
     const {id, title, post} = newPost;
 
-    //We're accessing the firestore.
-    const firestore = getFirestore();
+    //We're accessing the firestore
     firestore.collection("posts").doc(`${id}`).set({
       id,
       title,

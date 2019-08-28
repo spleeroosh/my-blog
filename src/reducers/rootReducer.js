@@ -4,8 +4,6 @@ import { firestoreReducer } from 'redux-firestore';
 
 import projectReducer from './projectReducer';
 
-console.log(projectReducer);
-
 const rootReducer = combineReducers({
   project: projectReducer,
   //With firestore we access firestoreReducer.

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './add-post.css';
 import uuid from 'uuid';
 
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 import { addPost } from './../../actions/index';
 
 import TitleForm from './title-form';
@@ -42,7 +44,7 @@ class AddPost extends Component {
     e.preventDefault();
     const id = uuid();
     const { title, post } = this.state;
-    const { posts, dispatch } = this.props;
+    const { posts, dispatch, firestore } = this.props;
     const { formattedTitle, formattedPost } = this.formattedText(title, post);
 
     const newPost = {
@@ -60,7 +62,7 @@ class AddPost extends Component {
       ...oldPosts      
     ];
     
-    dispatch(addPost(newPosts, newPost));
+    dispatch(addPost(newPosts, newPost, firestore));
     //myBlogService.addPost(id, formattedTitle, formattedPost);
     this.clearForm();
   };
@@ -114,10 +116,13 @@ const mapDispatchToProps = ( dispatch ) => {
   };
 };
 
-const mapStateToProps = ( { posts } ) => {
+const mapStateToProps = ( state ) => {
   return {
-    posts
-  };
+    posts: state.firestore.ordered.posts
+  }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddPost);
+export default compose(
+  firestoreConnect(() => ['posts']), // or { collection: 'todos' }
+  connect(mapStateToProps)
+ )(AddPost)
