@@ -95,7 +95,7 @@ class AddPost extends Component {
 
     const { title, post } = this.state;
     const { onTitleChange, addPost, onPostChange, onTabDown, textArea } = this;
-
+    console.log(this.props);
     return (
       <form action="submit" className="container">
         <fieldset>
@@ -124,5 +124,5 @@ const mapStateToProps = ( state ) => {
 
 export default compose(
   firestoreConnect(() => ['posts']), // or { collection: 'todos' }
-  connect(mapStateToProps)
- )(AddPost)
+  connect(mapStateToProps, mapDispatchToProps)
+ )(AddPost);

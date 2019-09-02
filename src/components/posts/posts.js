@@ -34,15 +34,9 @@ class Posts extends Component {
     });
   }
 
-  componentDidMount() {
+  componentDidUpdate  () {
     const { posts, dispatch } = this.props;
-    if(posts) {
-      dispatch(postsLoaded(posts));
-    }
-  }
 
-  componentWillReceiveProps(){
-    const { posts, dispatch } = this.props;
     if(posts) {
       dispatch(postsLoaded(posts));
     }
@@ -85,6 +79,6 @@ const mapDispatchToProps = ( dispatch ) => {
 };
 
 export default compose(
-  firestoreConnect(() => ['posts']), // or { collection: 'todos' }
-  connect(mapStateToProps)
- )(Posts)
+  firestoreConnect(() => ['posts']), 
+  connect(mapStateToProps, mapDispatchToProps)
+ )(Posts);

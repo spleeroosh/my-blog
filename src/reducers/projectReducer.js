@@ -1,10 +1,6 @@
 const initState = {
   count: 0,
-  posts: [{
-    id: 1,
-    title: 'sss',
-    post: 'sss'
-  }],
+  posts: [],
   isLogin: true,
   password: '',
   email: ''
