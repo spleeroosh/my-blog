@@ -6,8 +6,6 @@ import Counter from '../counter';
 import Posts from '../posts';
 import LogInForm from '../log-in-form';
 
-import './app.scss';
-
 const App = () => {
   return (
     <React.Fragment>

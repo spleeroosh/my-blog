@@ -13,53 +13,27 @@ import Post from './post';
 class Posts extends Component {
   onDeletePost = (id) => {
     const { posts, firestore, dispatch } = this.props;
-
-    let removedPost = {};
-    const oldPosts = posts.map((post) => {
-      return { ...post };
-    });
-
-    const newPosts = oldPosts.filter((post) => {
-      if(post.id !== id) {
-        return post;
-      } else {
-        removedPost = post;
-        return null;
-      }
-    });
-    
-  
-    firestore.collection("posts").doc(removedPost['id']).delete().then(() => {
-      dispatch(removePost(newPosts));
-    });
+    const newPosts = posts.filter(post => post.id !== id);
+    const removedPost = posts.filter(post => post.id === id)[0];
+    dispatch(removePost(newPosts, removedPost, firestore));
   }
 
-  componentDidUpdate  () {
+  componentDidUpdate() {
     const { posts, dispatch } = this.props;
-
-    if(posts) {
-      dispatch(postsLoaded(posts));
-    }
+    if (posts) dispatch(postsLoaded(posts));
   }
 
   render() {
     const { posts } = this.props;
     const { onDeletePost } = this;
 
-    if(!posts) {
-      return <div>loading...</div>
-    }
+    if (!posts) return <div>loading...</div>;
+    
     return (
       <React.Fragment>
         <section className="container row posts">
-          {posts.map((post) => {
-            return (
-              <Post newPost={post} onDeletePost={onDeletePost} key={post['id']}/>
-            );
-          })}
-          <div className="notifications col-3">Notifications</div>
+          {posts.map(post => <Post post={post} onDeletePost={onDeletePost} key={post['id']}/>)}
         </section>
-        
         <AddPost />
       </React.Fragment>    
     );

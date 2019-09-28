@@ -1,0 +1,28 @@
+.navbar {
+  display: flex;
+  color: $color-secondary;
+  background-color: $color-primary;
+
+  &__list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+  }
+
+  &__item {
+    padding: .5rem;
+  }
+
+  &__link {
+    color: $color-secondary;
+    padding: .5rem;
+
+    &:hover, &:active, &:focus {
+      color: $color-tertiary;
+      border-bottom: solid 1px $color-tertiary;
+      text-decoration: none;
+    }
+  }
+}

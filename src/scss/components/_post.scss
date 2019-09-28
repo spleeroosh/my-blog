@@ -1,0 +1,16 @@
+.post {
+
+  background-color: $color-primary;
+  color: $color-secondary;
+  border-radius: 1rem;
+  
+  &__header {
+    border-bottom: solid 1px $color-secondary;
+    padding: 1rem 2rem;
+  }
+
+  &__body {
+    word-wrap: break-word;
+    padding: 1rem 2rem;
+  }
+}

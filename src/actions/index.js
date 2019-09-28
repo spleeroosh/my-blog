@@ -17,22 +17,26 @@ const postsLoaded = (newPosts) => {
   }
 };
 
-const removePost = (newPosts) => {
-  return {
-    type: 'REMOVE_POST',
-    payload: newPosts
-  };
+const removePost = (newPosts, removedPost, firestore) => {
+  return (dispatch, newState) => {
+    firestore.collection("posts").doc(removedPost['id']).delete().then(() => {
+      dispatch({
+        type: 'REMOVE_POST',
+        payload: newPosts
+      })
+    })
+  }
 };
 
 const addPost = (newPosts, newPost, firestore) => {
   return (dispatch, getState) => {
-    const {id, title, post} = newPost;
+    const {id, title, content} = newPost;
 
     //We're accessing the firestore
     firestore.collection("posts").doc(`${id}`).set({
       id,
       title,
-      post
+      content
     }).then(() => {
       //If data is added successfully to firestore
       dispatch({

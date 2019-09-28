@@ -11,6 +11,8 @@ import App from './components/app';
 import store from './store';
 import firebaseApp from './firebase';
 
+import './scss/main.scss';
+
 const rrfConfig = { userProfile: 'users' };
 
 const rrfProps = {

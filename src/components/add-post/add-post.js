@@ -15,10 +15,10 @@ class AddPost extends Component {
   state = {
     id: null,
     title: '',
-    post: ''
+    content: ''
   }
 
-  textArea = React.createRef()
+  textArea = React.createRef();
 
   onTitleChange = (e) => {
     this.setState({
@@ -28,7 +28,7 @@ class AddPost extends Component {
 
   onPostChange = (e) => {
     this.setState({
-      post:  e.target.value
+      content:  e.target.value
     });
   };
 
@@ -36,21 +36,21 @@ class AddPost extends Component {
     this.setState({
       id: '',
       title: '',
-      post: ''
+      content: ''
     });
   };
 
   addPost = (e) => {
     e.preventDefault();
     const id = uuid();
-    const { title, post } = this.state;
+    const { title, content } = this.state;
     const { posts, dispatch, firestore } = this.props;
-    const { formattedTitle, formattedPost } = this.formattedText(title, post);
+    const { formattedTitle, formattedContent } = this.formattedText(title, content);
 
     const newPost = {
       id,
       title: formattedTitle,
-      post: formattedPost
+      content: formattedContent
     };
 
     const oldPosts = posts.map((post) => {
@@ -63,16 +63,15 @@ class AddPost extends Component {
     ];
     
     dispatch(addPost(newPosts, newPost, firestore));
-    //myBlogService.addPost(id, formattedTitle, formattedPost);
     this.clearForm();
   };
 
-  formattedText = (title, post) => {
+  formattedText = (title, content) => {
     const formattedTitle = title.replace(/ /g, '&nbsp;');
-    const formattedPost = post.replace(/ /g, '&nbsp;').replace(/\n/g, "<br />").replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
+    const formattedContent = content.replace(/ /g, '&nbsp;').replace(/\n/g, "<br />").replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
     return {
       formattedTitle,
-      formattedPost
+      formattedContent
     }
   };
 
@@ -80,12 +79,12 @@ class AddPost extends Component {
     
     if (e.keyCode === 9) {
       e.preventDefault();
-      let value = this.state.post;
+      let value = this.state.content;
       let start = this.textArea.current.selectionStart;
       let end = this.textArea.current.selectionEnd;
       this.setState(() => {
         return {
-          post: value.substring(0, start) + '\t' + value.substring(end)
+          content: value.substring(0, start) + '\t' + value.substring(end)
         };
       });
     };
@@ -93,14 +92,14 @@ class AddPost extends Component {
 
   render() {
 
-    const { title, post } = this.state;
+    const { title, content } = this.state;
     const { onTitleChange, addPost, onPostChange, onTabDown, textArea } = this;
-    console.log(this.props);
+
     return (
       <form action="submit" className="container">
         <fieldset>
           <TitleForm title={title} onTitleChange={onTitleChange} />
-          <PostForm post={post} onPostChange={onPostChange} onTabDown={onTabDown} textArea={textArea}/>
+          <PostForm content={content} onPostChange={onPostChange} onTabDown={onTabDown} textArea={textArea}/>
         </fieldset>
         <button type="button" className="btn btn-primary"
                 onClick={addPost}>+

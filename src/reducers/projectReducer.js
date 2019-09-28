@@ -16,7 +16,7 @@ const projectReducer = (state = initState, action) => {
 
     case 'DEC':
       return {
-        count: state['count'] - 1,
+        count: state['count'] > 0 ? state['count'] - 1 : state['count'],
         posts: state['posts']
       }
     

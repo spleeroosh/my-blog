@@ -2,7 +2,7 @@ import React from 'react';
 
 import './post-form.css';
 
-const PostForm = ({ post, onPostChange, onTabDown, textArea }) => {
+const PostForm = ({ content, onPostChange, onTabDown, textArea }) => {
   return (
     <div className="form-group">
       <label htmlFor="postForm" 
@@ -11,7 +11,7 @@ const PostForm = ({ post, onPostChange, onTabDown, textArea }) => {
                 id="postForm" 
                 rows="7"
                 placeholder="Введите текст статьи" 
-                value={post}
+                value={content}
                 onChange={onPostChange}
                 onKeyDown={e => onTabDown(e)}
                 ref={textArea}>
