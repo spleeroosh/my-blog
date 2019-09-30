@@ -2,9 +2,13 @@
 
   background-color: $color-primary;
   color: $color-secondary;
-  border-radius: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: solid 1px silver;
+ 
   
   &__header {
+    display: flex;
+    justify-content: space-between;
     border-bottom: solid 1px $color-secondary;
     padding: 1rem 2rem;
   }
@@ -12,5 +16,10 @@
   &__body {
     word-wrap: break-word;
     padding: 1rem 2rem;
+  }
+
+  &__paragraph {
+    font-size: 1.2rem;
+    text-align: left;
   }
 }

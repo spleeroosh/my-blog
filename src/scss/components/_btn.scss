@@ -1,0 +1,19 @@
+.btn {
+  border: solid 1px $color-secondary;
+  border-radius: 3rem;
+  font-size: 1rem;
+  box-shadow: 0 6px 8px 1px rgba(0, 0, 0, .6);
+  transition: all .5s;
+
+  &:hover {
+    border: solid 1px $color-tertiary;
+    color: $color-tertiary;
+    transform: translateY(-.2rem);
+    box-shadow: 0 8px 10px 2px rgba(0, 0, 0, .6);
+  }
+
+  &:active, &:focus {
+    transform: translateY(0);
+    box-shadow: 0 6px 8px 1px rgba(0, 0, 0, .6);
+  }
+}

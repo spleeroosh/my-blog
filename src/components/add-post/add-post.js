@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './add-post.css';
 import uuid from 'uuid';
 
 import { compose } from 'redux';
@@ -68,7 +67,9 @@ class AddPost extends Component {
 
   formattedText = (title, content) => {
     const formattedTitle = title.replace(/ /g, '&nbsp;');
-    const formattedContent = content.replace(/ /g, '&nbsp;').replace(/\n/g, "<br />").replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
+    const formattedContent = content.replace(/ /g, '&nbsp;')
+                                    .replace(/\n/g, "<br />")
+                                    .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
     return {
       formattedTitle,
       formattedContent
@@ -76,7 +77,6 @@ class AddPost extends Component {
   };
 
   onTabDown = (e) => {
-    
     if (e.keyCode === 9) {
       e.preventDefault();
       let value = this.state.content;
@@ -96,12 +96,16 @@ class AddPost extends Component {
     const { onTitleChange, addPost, onPostChange, onTabDown, textArea } = this;
 
     return (
-      <form action="submit" className="container">
+      <form action="submit" className="container col-9 add-form">
         <fieldset>
-          <TitleForm title={title} onTitleChange={onTitleChange} />
-          <PostForm content={content} onPostChange={onPostChange} onTabDown={onTabDown} textArea={textArea}/>
+          <TitleForm title={title} 
+                     onTitleChange={onTitleChange} />
+          <PostForm content={content} 
+                    onPostChange={onPostChange} 
+                    onTabDown={onTabDown} 
+                    textArea={textArea}/>
         </fieldset>
-        <button type="button" className="btn btn-primary"
+        <button type="button" className="btn"
                 onClick={addPost}>+
         </button>
       </form>

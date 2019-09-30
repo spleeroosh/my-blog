@@ -19,12 +19,15 @@ const postsLoaded = (newPosts) => {
 
 const removePost = (newPosts, removedPost, firestore) => {
   return (dispatch, newState) => {
-    firestore.collection("posts").doc(removedPost['id']).delete().then(() => {
-      dispatch({
-        type: 'REMOVE_POST',
-        payload: newPosts
-      })
-    })
+    firestore.collection("posts")
+             .doc(removedPost['id'])
+             .delete()
+             .then(() => {
+                dispatch({
+                  type: 'REMOVE_POST',
+                  payload: newPosts
+                })
+              })
   }
 };
 

@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import './posts.scss';
-
-import {postsLoaded, removePost} from './../../actions';
+import { removePost } from './../../actions';
 
 import AddPost from '../add-post';
 import Post from './post';
@@ -18,11 +16,6 @@ class Posts extends Component {
     dispatch(removePost(newPosts, removedPost, firestore));
   }
 
-  componentDidUpdate() {
-    const { posts, dispatch } = this.props;
-    if (posts) dispatch(postsLoaded(posts));
-  }
-
   render() {
     const { posts } = this.props;
     const { onDeletePost } = this;
@@ -31,7 +24,7 @@ class Posts extends Component {
     
     return (
       <React.Fragment>
-        <section className="container row posts">
+        <section className="posts container">
           {posts.map(post => <Post post={post} onDeletePost={onDeletePost} key={post['id']}/>)}
         </section>
         <AddPost />
