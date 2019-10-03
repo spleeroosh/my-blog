@@ -52,10 +52,33 @@ const addPost = (newPosts, newPost, firestore) => {
   }
 };
 
+const authUser = (email, password, firebase) => {
+  return (dispatch, getState) => {
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    }).then(() => {
+      const user = firebase.auth().currentUser;
+      const currentUser = {
+        userName: user.email,
+        id: user.uid
+      }
+      
+      dispatch({
+        type: 'AUTH_USER',
+        payload: currentUser
+      })
+    });
+  }
+};
+
 export {
   inc,
   dec,
   postsLoaded,
   removePost,
-  addPost
+  addPost,
+  authUser
 };  

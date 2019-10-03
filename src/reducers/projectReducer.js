@@ -3,7 +3,8 @@ const initState = {
   posts: [],
   isLogin: true,
   password: '',
-  email: ''
+  email: '',
+  user: false
 };
 
 const projectReducer = (state = initState, action) => {
@@ -36,6 +37,11 @@ const projectReducer = (state = initState, action) => {
       return state = {
         count: state['count'],
         posts: action.payload
+      }
+
+    case 'AUTH_USER':
+      return state = {
+        user: action.payload
       }
 
     default:

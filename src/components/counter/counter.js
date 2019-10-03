@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './counter.css';
 
 import { inc, dec } from './../../actions';
 
@@ -9,12 +8,12 @@ const Counter = () => {
   const dispatch = useDispatch();
   
   return (
-    <div className="jumbotron">
+    <div className="jumbotron counter">
       <div className="container">
         <div className='count'><span>{ count }</span></div>
-          <button className="btn btn-primary" onClick={() => dispatch(inc())}>+</button>
-          <button className="btn btn-primary" onClick={() => dispatch(dec())}>-</button>
-        </div>
+        <button className="btn counter__btn" onClick={() => dispatch(inc())}>+</button>
+        <button className="btn counter__btn" onClick={() => dispatch(dec())}>-</button>
+      </div>
     </div>
   );
 }

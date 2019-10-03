@@ -35,7 +35,8 @@ class Posts extends Component {
 
 const mapStateToProps = ( state ) => {
   return {
-    posts: state.firestore.ordered.posts
+    posts: state.firestore.ordered.posts,
+    user: state.project.user
   }
 };
 
