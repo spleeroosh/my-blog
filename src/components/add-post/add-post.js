@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { addPost } from './../../actions/index';
+import firebaseApp from './../../firebase';
 
 import TitleForm from './title-form';
 import PostForm from './post-form';
@@ -101,7 +102,8 @@ class AddPost extends Component {
 
     const { title, content } = this.state;
     const { onTitleChange, addPost, onPostChange, onTabDown, textArea } = this;
-
+    if(!firebaseApp.auth().currentUser) return null;
+    
     return (
       <form action="submit" className="container col-9 add-form">
         <fieldset>

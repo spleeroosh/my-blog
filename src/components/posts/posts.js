@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { removePost } from './../../actions';
+import { removePost, postsLoaded } from './../../actions';
 
 import AddPost from '../add-post';
 import Post from './post';
@@ -11,9 +11,16 @@ import Post from './post';
 class Posts extends Component {
   onDeletePost = (id) => {
     const { posts, firestore, dispatch } = this.props;
+    console.log(this.props);
     const newPosts = posts.filter(post => post.id !== id);
     const removedPost = posts.filter(post => post.id === id)[0];
     dispatch(removePost(newPosts, removedPost, firestore));
+  }
+
+  componentDidMount() {
+    const { dispatch, posts } = this.props;
+    console.log(this.props);
+    if(posts) dispatch(postsLoaded(posts));
   }
 
   render() {
@@ -36,7 +43,6 @@ class Posts extends Component {
 const mapStateToProps = ( state ) => {
   return {
     posts: state.firestore.ordered.posts,
-    user: state.project.user
   }
 };
 

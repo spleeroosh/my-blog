@@ -1,7 +1,6 @@
 const initState = {
   count: 0,
   posts: [],
-  isLogin: true,
   password: '',
   email: '',
   user: false
@@ -12,35 +11,41 @@ const projectReducer = (state = initState, action) => {
     case 'INC':
       return state = {
         count: state['count'] + 1,
-        posts: state['posts']
+        posts: state['posts'],
+        user: state['user']
       }
 
     case 'DEC':
       return {
         count: state['count'] > 0 ? state['count'] - 1 : state['count'],
-        posts: state['posts']
+        posts: state['posts'],
+        user: state['user']
       }
     
     case 'POSTS_LOADED':
       return state = {
         count: state['count'],
-        posts: action.payload
+        posts: action.payload,
+        user: state['user']
       }
 
     case 'REMOVE_POST':
       return state = {
         count: state['count'],
-        posts: action.payload
+        posts: action.payload,
+        user: state['user']
       }
 
     case 'ADD_POST':
       return state = {
         count: state['count'],
-        posts: action.payload
+        posts: action.payload,
+        user: state['user']
       }
 
     case 'AUTH_USER':
       return state = {
+        count: state['count'],
         user: action.payload
       }
 

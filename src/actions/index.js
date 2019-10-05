@@ -1,3 +1,5 @@
+import { actionTypes } from "redux-firestore";
+
 const inc = () => {
   return {
     type: 'INC'
@@ -10,11 +12,11 @@ const dec = () => {
   };
 };
 
-const postsLoaded = (newPosts) => {
+const postsLoaded = (posts) => {
   return {
     type: 'POSTS_LOADED',
-    payload: newPosts
-  }
+    payload: posts
+  }        
 };
 
 const removePost = (newPosts, removedPost, firestore) => {
@@ -59,20 +61,31 @@ const authUser = (email, password, firebase) => {
       var errorCode = error.code;
       var errorMessage = error.message;
       // ...
-    }).then(() => {
-      const user = firebase.auth().currentUser;
-      const currentUser = {
-        userName: user.email,
-        id: user.uid
-      }
+    })
+    // .then(() => {
+    //   const user = firebase.auth().currentUser;
+    //   const currentUser = {
+    //     userName: user.email,
+    //     id: user.uid
+    //   }
       
-      dispatch({
-        type: 'AUTH_USER',
-        payload: currentUser
-      })
-    });
+    //   dispatch({
+    //     type: 'AUTH_USER',
+    //     payload: currentUser
+    //   })
+    // });
   }
 };
+
+const singOut = (firebase) => {
+  return (dispatch) => {
+    firebase.logout().then(function() {
+      // Sign-out successful.
+    }).catch(function(error) {
+      // An error happened.
+    });
+  }
+}
 
 export {
   inc,
@@ -80,5 +93,6 @@ export {
   postsLoaded,
   removePost,
   addPost,
-  authUser
+  authUser,
+  singOut
 };  

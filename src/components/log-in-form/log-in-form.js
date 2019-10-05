@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { authUser } from './../../actions';
+import { authUser, singOut } from './../../actions';
 
 import firebaseApp from "./../../firebase";
 
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
 
 class LogInForm extends Component {
@@ -13,6 +15,7 @@ class LogInForm extends Component {
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.singOut = this.singOut.bind(this);
   }
 
   state = {
@@ -39,11 +42,14 @@ class LogInForm extends Component {
     dispatch(authUser(email, password, firebaseApp));
   }
 
-  render() {
-    console.log(this.props.state.project.user);
+  singOut() {
+    const { dispatch, firebase } = this.props;
+    dispatch(singOut(firebase));
+  }
 
-    if (this.props.state.project.user) {
-      return <div className="singout">SING OUT</div>
+  render() {
+    if (firebaseApp.auth().currentUser) {
+      return <div className="singout" onClick={this.singOut}>SING OUT</div>
     }
 
     return (
@@ -91,4 +97,4 @@ const mapStateToProps = ( state ) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
+export default compose(firestoreConnect(), connect(mapStateToProps, mapDispatchToProps))(LogInForm);
