@@ -1,0 +1,26 @@
+.remove-btn, .remove-btn:link, .remove-btn:visited {
+  border-radius: 50%;
+  border: solid black 1.4px;
+  //padding-left: .05rem;
+  width: 2rem;
+  height: 2rem;
+  transition: all .2s;
+}
+
+.remove-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 2px 1px rgba(0, 0, 0, .3);
+}
+
+.remove-btn:active, .remove-btn:focus {
+  transform: translateY(-1.5px);
+  box-shadow: 0 2px 1px 1px rgba(0, 0, 0, .3);
+}
+
+.remove-btn__image {
+  cursor: pointer;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-bottom: .4rem;
+  transform: scale(0.8);
+}

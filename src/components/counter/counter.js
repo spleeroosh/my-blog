@@ -1,37 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './counter.css';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { inc, dec } from './../../actions';
 
-class Counter extends Component {
-  componentDidMount() {
-
-  }
-  render() {
-    const { count, dispatch } = this.props;
-    return (
-      <div className="jumbotron">
-        <div className="container">
-          <div className='count'><span>{ count }</span></div>
-            <button className="btn btn-primary" onClick={() => dispatch(inc())}>+</button>
-            <button className="btn btn-primary" onClick={() => dispatch(dec())}>-</button>
-          </div>
+const Counter = () => {
+  const count = useSelector(store => store.project.count);
+  const dispatch = useDispatch();
+  
+  return (
+    <div className="jumbotron counter">
+      <div className="container">
+        <div className='count'><span>{ count }</span></div>
+        <button className="btn counter__btn" onClick={() => dispatch(inc())}>+</button>
+        <button className="btn counter__btn" onClick={() => dispatch(dec())}>-</button>
       </div>
-    );
-  };
-};
-
-const MapStateToProps = (state) => {
-  return {
-    count: state['count']
-  }
-};
-
-const MapDispatchToProps = (dispatch) => {
-  return {
-    dispatch: dispatch
-  }
+    </div>
+  );
 }
 
-export default connect(MapStateToProps, MapDispatchToProps)(Counter);
+export default Counter;

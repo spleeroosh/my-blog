@@ -3,21 +3,32 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore'
+
 import App from './components/app';
-import MyBlogService from './services/myblog-service';
-import { MyBlogServiceProvider } from './components/myblog-service-context';
 
 import store from './store';
+import firebaseApp from './firebase';
 
-const myBlogService = new MyBlogService();
+import './scss/main.scss';
+
+const rrfConfig = { userProfile: 'users' };
+
+const rrfProps = {
+  firebase: firebaseApp,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance
+};
 
 ReactDOM.render(
   <Provider store={store}>
-    <MyBlogServiceProvider value={myBlogService}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
       <Router>
         <App />
       </Router>
-    </MyBlogServiceProvider>
+    </ReactReduxFirebaseProvider>
   </Provider>, 
   document.getElementById('root'))
 

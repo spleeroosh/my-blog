@@ -1,0 +1,11 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-top: 15rem;
+  width: 100%;
+  font-size: 2rem;
+  & div {
+    text-align: center;
+  }
+}

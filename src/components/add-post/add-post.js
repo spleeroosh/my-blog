@@ -1,54 +1,63 @@
 import React, { Component } from 'react';
-import './add-post.css';
 import uuid from 'uuid';
-import { withMyBlogService } from './../hoc-helpers';
+
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 import { addPost } from './../../actions/index';
+import firebaseApp from './../../firebase';
 
 import TitleForm from './title-form';
 import PostForm from './post-form';
 
 class AddPost extends Component {
+  constructor() {
+    super();
+    this.state = {
+      id: null,
+      title: '',
+      content: ''
+    }
 
-  state = {
-    id: null,
-    title: '',
-    post: ''
+    this.addPost = this.addPost.bind(this);
+    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onPostChange = this.onPostChange.bind(this);
   }
+  
 
-  textArea = React.createRef()
+  textArea = React.createRef();
 
-  onTitleChange = (e) => {
+  onTitleChange(e) {
     this.setState({
       title: e.target.value
     });
   };
 
-  onPostChange = (e) => {
+  onPostChange(e) {
     this.setState({
-      post:  e.target.value
+      content:  e.target.value
     });
   };
 
-  clearForm = () => {
+  clearForm() {
     this.setState({
       id: '',
       title: '',
-      post: ''
+      content: ''
     });
   };
 
-  addPost = (e) => {
+  addPost(e) {
     e.preventDefault();
     const id = uuid();
-    const { title, post } = this.state;
-    const { posts, dispatch, myBlogService } = this.props;
-    const { formattedTitle, formattedPost } = this.formattedText(title, post);
+    const { title, content } = this.state;
+    const { posts, dispatch, firestore } = this.props;
+    const { formattedTitle, formattedContent } = this.formattedText(title, content);
 
     const newPost = {
       id,
       title: formattedTitle,
-      post: formattedPost
+      content: formattedContent
     };
 
     const oldPosts = posts.map((post) => {
@@ -60,30 +69,30 @@ class AddPost extends Component {
       ...oldPosts      
     ];
     
-    dispatch(addPost(newPosts));
-    myBlogService.addPost(id, formattedTitle, formattedPost);
+    dispatch(addPost(newPosts, newPost, firestore));
     this.clearForm();
   };
 
-  formattedText = (title, post) => {
+  formattedText(title, content) {
     const formattedTitle = title.replace(/ /g, '&nbsp;');
-    const formattedPost = post.replace(/ /g, '&nbsp;').replace(/\n/g, "<br />").replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
+    const formattedContent = content.replace(/ /g, '&nbsp;')
+                                    .replace(/\n/g, "<br />")
+                                    .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
     return {
       formattedTitle,
-      formattedPost
+      formattedContent
     }
   };
 
-  onTabDown = (e) => {
-    
+  onTabDown(e) {
     if (e.keyCode === 9) {
       e.preventDefault();
-      let value = this.state.post;
+      let value = this.state.content;
       let start = this.textArea.current.selectionStart;
       let end = this.textArea.current.selectionEnd;
       this.setState(() => {
         return {
-          post: value.substring(0, start) + '\t' + value.substring(end)
+          content: value.substring(0, start) + '\t' + value.substring(end)
         };
       });
     };
@@ -91,16 +100,21 @@ class AddPost extends Component {
 
   render() {
 
-    const { title, post } = this.state;
+    const { title, content } = this.state;
     const { onTitleChange, addPost, onPostChange, onTabDown, textArea } = this;
-
+    if(!firebaseApp.auth().currentUser) return null;
+    
     return (
-      <form action="submit" className="container">
+      <form action="submit" className="container col-9 add-form">
         <fieldset>
-          <TitleForm title={title} onTitleChange={onTitleChange} />
-          <PostForm post={post} onPostChange={onPostChange} onTabDown={onTabDown} textArea={textArea}/>
+          <TitleForm title={title} 
+                     onTitleChange={onTitleChange} />
+          <PostForm content={content} 
+                    onPostChange={onPostChange} 
+                    onTabDown={onTabDown} 
+                    textArea={textArea}/>
         </fieldset>
-        <button type="button" className="btn btn-primary"
+        <button type="button" className="btn"
                 onClick={addPost}>+
         </button>
       </form>
@@ -114,10 +128,13 @@ const mapDispatchToProps = ( dispatch ) => {
   };
 };
 
-const mapStateToProps = ( { posts } ) => {
+const mapStateToProps = ( state ) => {
   return {
-    posts
-  };
+    posts: state.firestore.ordered.posts
+  }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withMyBlogService()(AddPost));
+export default compose(
+  firestoreConnect(() => ['posts']), // or { collection: 'todos' }
+  connect(mapStateToProps, mapDispatchToProps)
+ )(AddPost);

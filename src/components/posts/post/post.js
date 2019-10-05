@@ -1,31 +1,23 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
- 
-import './post.scss';
+import firebaseApp from './../../../firebase';
 
-import removeButton from './../../../images/remove-button.svg';
+import buttonSVG from './../../../images/remove-button.svg';
 
-const Post = ({ newPost, onDeletePost }) => {
+const Post = ({ post, onDeletePost }) => {
   
-  const { id, title, post } = newPost;
-
+  const { id, title, content } = post;
+  const removeButton = firebaseApp.auth().currentUser ? <div className="remove-btn" onClick={() => onDeletePost(id)}><img src={buttonSVG} alt="remove button" className="remove-btn__image"/></div> : null;
   return (
-    <React.Fragment>
-      <div className="mg-auto post col-9">
-      <div className="card-header bg-primary post__header">
-        <h4 className="post__heading text-white">{ReactHtmlParser(title)}</h4>
-        <div className="remove-btn"
-              onClick={() => onDeletePost(id)}>
-          <img src={removeButton} alt="remove button" className="remove-btn__image"/>
-        </div>
-        </div>
-        <div className="card-body post__body">
-          <p className="post__paragraph text-primary">{ReactHtmlParser(post)}</p>
-        </div>
+    <div className="post col-12">
+      <div className="post__header">
+        <h4 className="post__heading">{ReactHtmlParser(title)}</h4>
+        {removeButton}
       </div>
-      <div className="notifications col-3">Notifications</div>
-    </React.Fragment>
-    
+      <div className="post__body">
+        <p className="post__paragraph">{ReactHtmlParser(content)}</p>
+      </div>
+    </div>    
   );
 };
 
