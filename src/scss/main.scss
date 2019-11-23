@@ -1,5 +1,6 @@
 // ABSTRACT
 @import './abstract/variables.scss';
+@import './abstract/utils';
 
 // COMPONENTS
 @import './components/home.scss';
@@ -11,7 +12,10 @@
 @import './components/login.scss';
 @import './components/btn.scss';
 @import './components/counter.scss';
-@import './components/singout.scss';
+@import './components/sign-out.scss';
 
 // BASE
 @import './base/base';
+
+// LAYERS
+@import './layers/main-content'

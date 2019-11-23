@@ -1,4 +1,4 @@
-import { actionTypes } from "redux-firestore";
+import { db, auth, database } from './../../src/firebase';
 
 const inc = () => {
   return {
@@ -12,16 +12,23 @@ const dec = () => {
   };
 };
 
-const postsLoaded = (posts) => {
-  return {
-    type: 'POSTS_LOADED',
-    payload: posts
-  }        
+const postsLoaded = () => {
+  return async (dispatch, newState) => {
+    let newData = [];
+    await db.collection('posts').get().then(qs => {
+      qs.forEach(doc => newData.push(doc.data()));
+    });
+
+    dispatch({
+      type: 'POSTS_LOADED',
+      payload: newData
+    });
+  }     
 };
 
-const removePost = (newPosts, removedPost, firestore) => {
+const removePost = (newPosts, removedPost) => {
   return (dispatch, newState) => {
-    firestore.collection("posts")
+    db.collection("posts")
              .doc(removedPost['id'])
              .delete()
              .then(() => {
@@ -33,12 +40,12 @@ const removePost = (newPosts, removedPost, firestore) => {
   }
 };
 
-const addPost = (newPosts, newPost, firestore) => {
+const addPost = (newPosts, newPost) => {
   return (dispatch, getState) => {
     const {id, title, content} = newPost;
 
     //We're accessing the firestore
-    firestore.collection("posts").doc(`${id}`).set({
+    db.collection("posts").doc(`${id}`).set({
       id,
       title,
       content
@@ -54,33 +61,38 @@ const addPost = (newPosts, newPost, firestore) => {
   }
 };
 
-const authUser = (email, password, firebase) => {
+const authUser = (email, password) => {
   return (dispatch, getState) => {
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    auth.signInWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
+      alert(errorMessage);
       // ...
     })
-    // .then(() => {
-    //   const user = firebase.auth().currentUser;
-    //   const currentUser = {
-    //     userName: user.email,
-    //     id: user.uid
-    //   }
+    .then(() => {
+      const user = auth.currentUser;
+      const currentUser = {
+        userName: user.email,
+        id: user.uid
+      }
       
-    //   dispatch({
-    //     type: 'AUTH_USER',
-    //     payload: currentUser
-    //   })
-    // });
+      dispatch({
+        type: 'AUTH_USER',
+        payload: currentUser
+      })
+    });
   }
 };
 
-const singOut = (firebase) => {
+const signOut = () => {
   return (dispatch) => {
-    firebase.logout().then(function() {
+    auth.signOut().then(function() {
       // Sign-out successful.
+      dispatch({
+        type: 'AUTH_USER',
+        payload: null
+      })
     }).catch(function(error) {
       // An error happened.
     });
@@ -94,5 +106,5 @@ export {
   removePost,
   addPost,
   authUser,
-  singOut
+  signOut
 };  

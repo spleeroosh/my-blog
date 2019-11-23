@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
 import { addPost } from './../../actions/index';
-import firebaseApp from './../../firebase';
 
 import TitleForm from './title-form';
 import PostForm from './post-form';
@@ -22,9 +19,9 @@ class AddPost extends Component {
     this.addPost = this.addPost.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onPostChange = this.onPostChange.bind(this);
+    this.onTabDown = this.onTabDown.bind(this);
   }
   
-
   textArea = React.createRef();
 
   onTitleChange(e) {
@@ -51,7 +48,8 @@ class AddPost extends Component {
     e.preventDefault();
     const id = uuid();
     const { title, content } = this.state;
-    const { posts, dispatch, firestore } = this.props;
+    const { posts, dispatch } = this.props;
+
     const { formattedTitle, formattedContent } = this.formattedText(title, content);
 
     const newPost = {
@@ -69,7 +67,7 @@ class AddPost extends Component {
       ...oldPosts      
     ];
     
-    dispatch(addPost(newPosts, newPost, firestore));
+    dispatch(addPost(newPosts, newPost));
     this.clearForm();
   };
 
@@ -101,23 +99,24 @@ class AddPost extends Component {
   render() {
 
     const { title, content } = this.state;
+    const { user } = this.props.state;
     const { onTitleChange, addPost, onPostChange, onTabDown, textArea } = this;
-    if(!firebaseApp.auth().currentUser) return null;
     
+    const add_posts = <form action="submit" className="container col-9 add-form">
+                        <fieldset>
+                          <TitleForm title={title} 
+                                    onTitleChange={onTitleChange} />
+                          <PostForm content={content} 
+                                    onPostChange={onPostChange} 
+                                    onTabDown={onTabDown} 
+                                    textArea={textArea}/>
+                        </fieldset>
+                        <button type="button" className="btn"
+                                onClick={addPost}>+
+                        </button>
+                      </form>;
     return (
-      <form action="submit" className="container col-9 add-form">
-        <fieldset>
-          <TitleForm title={title} 
-                     onTitleChange={onTitleChange} />
-          <PostForm content={content} 
-                    onPostChange={onPostChange} 
-                    onTabDown={onTabDown} 
-                    textArea={textArea}/>
-        </fieldset>
-        <button type="button" className="btn"
-                onClick={addPost}>+
-        </button>
-      </form>
+      user ? add_posts : <div></div>
     );
   };
 };
@@ -130,11 +129,8 @@ const mapDispatchToProps = ( dispatch ) => {
 
 const mapStateToProps = ( state ) => {
   return {
-    posts: state.firestore.ordered.posts
+    state
   }
 };
 
-export default compose(
-  firestoreConnect(() => ['posts']), // or { collection: 'todos' }
-  connect(mapStateToProps, mapDispatchToProps)
- )(AddPost);
+export default connect(mapStateToProps, mapDispatchToProps)(AddPost);
