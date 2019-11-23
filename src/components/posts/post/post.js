@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import firebaseApp from './../../../firebase';
+import db from './../../../firebase';
 
 import buttonSVG from './../../../images/remove-button.svg';
 
-const Post = ({ post, onDeletePost }) => {
-  
+const Post = ({ post, user, onDeletePost }) => {
   const { id, title, content } = post;
-  const removeButton = firebaseApp.auth().currentUser ? <div className="remove-btn" onClick={() => onDeletePost(id)}><img src={buttonSVG} alt="remove button" className="remove-btn__image"/></div> : null;
+  const removeButton =  user ? <div className="remove-btn" onClick={() => onDeletePost(id)}>
+                          <img src={buttonSVG} alt="remove button" className="remove-btn__image"/>
+                        </div> : null;
   return (
     <div className="post col-12">
       <div className="post__header">

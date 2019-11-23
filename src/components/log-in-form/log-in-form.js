@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { authUser, singOut } from './../../actions';
+import { authUser, signOut } from './../../actions';
 
-import firebaseApp from "./../../firebase";
+import { db, auth } from "./../../firebase";
 
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
+
 
 
 class LogInForm extends Component {
@@ -14,8 +13,8 @@ class LogInForm extends Component {
 
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
-    this.onClick = this.onClick.bind(this);
-    this.singOut = this.singOut.bind(this);
+    this.onClick = this.singIn.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   state = {
@@ -35,23 +34,25 @@ class LogInForm extends Component {
     })
   }
 
-  onClick(e) {
+  singIn(e) {
     e.preventDefault();
     const { dispatch } = this.props;
     const { email, password } = this.state;
-    dispatch(authUser(email, password, firebaseApp));
+    dispatch(authUser(email, password));
   }
 
-  singOut() {
-    const { dispatch, firebase } = this.props;
-    dispatch(singOut(firebase));
+  signOut() {
+    const { dispatch } = this.props;
+    dispatch(signOut());
   }
 
   render() {
-    if (firebaseApp.auth().currentUser) {
-      return <div className="singout" onClick={this.singOut}>SING OUT</div>
+    const { user } = this.props.state;
+    
+    if (user) {
+      return <div className="sign-out" onClick={this.signOut}>SING OUT</div>
     }
-
+ 
     return (
       <div className="card mb-3 login">
         <div className="card-header login__header">Введите почту и пароль для входа</div>
@@ -59,7 +60,7 @@ class LogInForm extends Component {
           <form className="login__form">
             <fieldset>
               <div className="form-group">
-                <label for="exampleInputEmail1">Почта</label>
+                <label htmlFor="exampleInputEmail1">Почта</label>
                 <input type="email" 
                        className="form-control" 
                        id="exampleInputEmail1" 
@@ -69,14 +70,14 @@ class LogInForm extends Component {
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
               <div className="form-group">
-                <label for="exampleInputPassword1">Пароль</label>
+                <label htmlFor="exampleInputPassword1">Пароль</label>
                 <input type="password" 
                        className="form-control" 
                        id="exampleInputPassword1" 
                        placeholder="Пароль"
                        onChange={this.onPasswordChange}/>
               </div>
-              <button type="submit" className="btn" onClick={(e) => this.onClick(e)}>Войти</button>
+              <button type="submit" className="btn" onClick={(e) => this.singIn(e)}>Войти</button>
             </fieldset>
           </form>
         </div>
@@ -97,4 +98,4 @@ const mapStateToProps = ( state ) => {
   }
 };
 
-export default compose(firestoreConnect(), connect(mapStateToProps, mapDispatchToProps))(LogInForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
