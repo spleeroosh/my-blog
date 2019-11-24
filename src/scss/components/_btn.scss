@@ -1,7 +1,8 @@
 .btn {
   font-size: 1rem;
   padding: .5rem 1.5rem;
-  border: solid 1px $color-secondary;
+  border: solid 1px $color-border;
+  color: $color-secondary;
   border-radius: 3px;
   transition: all .5s;
 
@@ -14,6 +15,7 @@
 
   &:active, &:focus {
     transform: translateY(0);
+    color: $color-tertiary;
     box-shadow: 0 6px 8px 1px rgba(0, 0, 0, .6);
   }
 }
