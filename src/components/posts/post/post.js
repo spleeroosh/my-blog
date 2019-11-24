@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import db from './../../../firebase';
 
 import buttonSVG from './../../../images/remove-button.svg';
 

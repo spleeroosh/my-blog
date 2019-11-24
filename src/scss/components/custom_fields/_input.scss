@@ -1,0 +1,22 @@
+.input-form {
+  &__input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px 20px 5px 20px;
+    border: 1px solid $color-border;
+    border-radius: 3px;
+
+    font-size: 15px;
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.514);
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+      border: 1px solid $color-tertiary;
+      color: $color-tertiary;
+    }
+  }
+}

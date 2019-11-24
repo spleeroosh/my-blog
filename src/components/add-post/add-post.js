@@ -4,8 +4,8 @@ import uuid from 'uuid';
 import { connect } from 'react-redux';
 import { addPost } from './../../actions/index';
 
-import TitleForm from './title-form';
 import PostForm from './post-form';
+import { Input } from './../custom_fields/input';
 
 class AddPost extends Component {
   constructor() {
@@ -48,7 +48,8 @@ class AddPost extends Component {
     e.preventDefault();
     const id = uuid();
     const { title, content } = this.state;
-    const { posts, dispatch } = this.props;
+    const { dispatch } = this.props;
+    const { posts } = this.props.state;
 
     const { formattedTitle, formattedContent } = this.formattedText(title, content);
 
@@ -104,8 +105,14 @@ class AddPost extends Component {
     
     const add_posts = <form action="submit" className="container col-9 add-form">
                         <fieldset>
-                          <TitleForm title={title} 
-                                    onTitleChange={onTitleChange} />
+                          <Input type={'text'} 
+                            placeholder={'Введите название статьи'}
+                            title={title}
+                            small_text={''}
+                            label={''}
+                            class_name={'add-form__input'}
+                            onInputChange={onTitleChange}/>
+
                           <PostForm content={content} 
                                     onPostChange={onPostChange} 
                                     onTabDown={onTabDown} 
@@ -116,7 +123,7 @@ class AddPost extends Component {
                         </button>
                       </form>;
     return (
-      user ? add_posts : <div></div>
+      user ? add_posts : null
     );
   };
 };

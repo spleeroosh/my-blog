@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { authUser, signOut } from './../../actions';
 
-import { db, auth } from "./../../firebase";
-
 import { connect } from 'react-redux';
 
-
+import { Input } from './../custom_fields/input';
 
 class LogInForm extends Component {
   constructor() {
@@ -54,30 +52,27 @@ class LogInForm extends Component {
     }
  
     return (
-      <div className="card mb-3 login">
-        <div className="card-header login__header">Введите почту и пароль для входа</div>
+      <div className="card mb-3 log-in">
+        <div className="card-header log-in__header">Введите почту и пароль для входа</div>
         <div className="card-body">
-          <form className="login__form">
+          <form className="log-in__form">
             <fieldset>
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Почта</label>
-                <input type="email" 
-                       className="form-control" 
-                       id="exampleInputEmail1" 
-                       aria-describedby="emailHelp" 
-                       placeholder="Введите почту"
-                       onChange={this.onEmailChange}/>
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Пароль</label>
-                <input type="password" 
-                       className="form-control" 
-                       id="exampleInputPassword1" 
-                       placeholder="Пароль"
-                       onChange={this.onPasswordChange}/>
-              </div>
-              <button type="submit" className="btn" onClick={(e) => this.singIn(e)}>Войти</button>
+
+              <Input type={'email'} 
+                placeholder={'Введите почту'}
+                small_text={''}
+                label={''}
+                class_name={'log-in__input'}
+                onInputChange={this.onEmailChange}/>
+
+              <Input type={'password'} 
+                placeholder={'Введите пароль'}
+                small_text={''}
+                label={''}
+                class_name={'log-in__input'}
+                onInputChange={this.onPasswordChange}/>
+
+              <button type="submit" className="log-in__enter-button btn" onClick={(e) => this.singIn(e)}>Войти</button>
             </fieldset>
           </form>
         </div>

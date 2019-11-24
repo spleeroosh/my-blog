@@ -6,8 +6,22 @@
   box-sizing: inherit;
 }
 
-body {
-  box-sizing: border-box;
-  padding: 0;
-  height: 100vh;
+// body {
+//   box-sizing: border-box;
+//   padding: 0;
+//   // height: 100%;
+//   // width: 100%;
+//   // overflow: hidden;
+// }
+
+
+html, body{
+  height: 99%;
+  overflow:hidden;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }

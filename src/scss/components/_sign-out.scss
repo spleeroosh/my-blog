@@ -5,8 +5,10 @@
   width: fit-content;
   margin-left: auto; 
   margin-right: auto;
+  color: $color-tertiary;
+  border-bottom: 1px solid transparent;
 
   &:hover {
-    border-bottom: 1px solid $color-secondary;
+    border-bottom: 1px solid $color-tertiary;
   }
 }

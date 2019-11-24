@@ -1,4 +1,4 @@
-.login {
+.log-in {
   display: flex;
   justify-content: center;
   width: 25rem;
@@ -15,5 +15,9 @@
       height: fit-content;
       background-color: transparent;
       border-radius: 10rem;
+    }
+
+    &__input {
+      margin-bottom: 10px;
     }
 }
