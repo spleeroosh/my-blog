@@ -1,3 +1,17 @@
+В проекте используются:
+  1. React - Проект создан при помощи create react app.<br>
+  2. Redux - Для управления состоянием приложения.<br>
+  3. Thunk - Для асинхронных создателей действий (запросы к fs в создателях действий).<br>
+  4. Firestore/Firebase в качестве бэка (стор + авторизация).<br>
+  5. SCSS - препроцессор для стилизации.<br>
+  6. Создаются кастомные компоненты полей ввода (text, email, textarea, etc) в папке src/components/custom_fields, 
+     эти компоненты можно повторно использовать в любой части проекта.<br>
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
