@@ -1,8 +1,13 @@
 .add-form {
   background-color: $color-primary;
   color: $color-secondary;
+  width: 800px;
   border-radius: 1rem;
   margin-bottom: 2rem;
   box-shadow: 0 6px 8px 1px rgba(0, 0, 0, .6);
   padding: 1rem 2rem;
+
+  &__input {
+    margin-bottom: 10px;
+  }
 }
