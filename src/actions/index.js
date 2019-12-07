@@ -1,4 +1,4 @@
-import { db, auth, database } from './../../src/firebase';
+import { db, auth, database, firebase } from './../../src/firebase';
 
 const inc = () => {
   return {
@@ -15,6 +15,7 @@ const dec = () => {
 const postsLoaded = () => {
   return async (dispatch, newState) => {
     let newData = [];
+
     await db.collection('posts').get().then(qs => {
       qs.forEach(doc => newData.push(doc.data()));
     });
@@ -40,15 +41,26 @@ const removePost = (newPosts, removedPost) => {
   }
 };
 
-const addPost = (newPosts, newPost) => {
+const addPost = (oldPosts, id, formattedTitle, formattedPost) => {
   return (dispatch, getState) => {
-    const {id, title, content} = newPost;
-
+    let newPosts,
+        newPost = {
+          id,
+          title: formattedTitle,
+          content: formattedPost,
+          date: new Date()
+        };
+    
+    newPosts = [
+      ...oldPosts,
+      newPost
+    ]
     //We're accessing the firestore
     db.collection("posts").doc(`${id}`).set({
       id,
-      title,
-      content
+      title: formattedTitle,
+      content: formattedPost,
+      date: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
       //If data is added successfully to firestore
       dispatch({
@@ -72,15 +84,18 @@ const authUser = (email, password) => {
     })
     .then(() => {
       const user = auth.currentUser;
-      const currentUser = {
-        userName: user.email,
-        id: user.uid
+
+      if(user) {
+        const currentUser = {
+          userName: user.email,
+          id: user.uid
+        }
+        
+        dispatch({
+          type: 'AUTH_USER',
+          payload: currentUser
+        })
       }
-      
-      dispatch({
-        type: 'AUTH_USER',
-        payload: currentUser
-      })
     });
   }
 };
@@ -90,9 +105,11 @@ const signOut = () => {
     auth.signOut().then(function() {
       // Sign-out successful.
       dispatch({
-        type: 'AUTH_USER',
-        payload: null
-      })
+        type: 'SIGN_OUT',
+        payload: {
+          id: null
+        }
+      });
     }).catch(function(error) {
       // An error happened.
     });

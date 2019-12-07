@@ -1,7 +1,9 @@
 const initState = {
   count: 0,
   posts: [],
-  user: false
+  user: {
+    id: false
+  }
 };
 
 const projectReducer = (state = initState, action) => {

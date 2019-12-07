@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import uuid from 'uuid';
 
 import { connect } from 'react-redux';
@@ -26,7 +27,7 @@ class AddPost extends Component {
 
   onTitleChange(e) {
     this.setState({
-      title: e.target.value
+      title: e.target.value.toUpperCase()
     });
   };
 
@@ -44,34 +45,33 @@ class AddPost extends Component {
     });
   };
 
+  /**
+   * Получаем заголовок и текст из состояния,
+   * форматируем и диспатчим статью,
+   * после чего очищаем форму
+   * @param {*} e 
+   */
   addPost(e) {
     e.preventDefault();
-    const id = uuid();
-    const { title, content } = this.state;
-    const { dispatch } = this.props;
-    const { posts } = this.props.state;
-
-    const { formattedTitle, formattedContent } = this.formattedText(title, content);
-
-    const newPost = {
-      id,
-      title: formattedTitle,
-      content: formattedContent
-    };
-
-    const oldPosts = posts.map((post) => {
-      return { ...post };
-    });
-
-    const newPosts = [
-      newPost,
-      ...oldPosts      
-    ];
+    const id = uuid(),
+        { title, content } = this.state,
+        { dispatch } = this.props,
+        { posts } = this.props,
+        { formattedTitle, formattedContent } = this.formattedText(title, content),
+        oldPosts = posts.map((post) => {
+          return { ...post };
+        });
     
-    dispatch(addPost(newPosts, newPost));
+    dispatch(addPost(oldPosts, id, formattedTitle, formattedContent));
     this.clearForm();
   };
 
+  /**
+   * Форматируем заголовок, и текст, добавляя пробелы, и переносы строк
+   * @param {String} title заголовок статьи
+   * @param {String} content текст статьи
+   * @returns {Object} Возвращаем объект с отформатированным заголовком, и текстом
+   */
   formattedText(title, content) {
     const formattedTitle = title.replace(/ /g, '&nbsp;');
     const formattedContent = content.replace(/ /g, '&nbsp;')
@@ -83,6 +83,10 @@ class AddPost extends Component {
     }
   };
 
+  /**
+   * Функция, добавляющая табуляцию в textarea
+   * @param {*} e event 
+   */
   onTabDown(e) {
     if (e.keyCode === 9) {
       e.preventDefault();
@@ -100,7 +104,7 @@ class AddPost extends Component {
   render() {
 
     const { title, content } = this.state;
-    const { user } = this.props.state;
+    const { user } = this.props;
     const { onTitleChange, addPost, onPostChange, onTabDown, text_area } = this;
     
     const add_posts = <form action="submit" className="container col-9 add-form">
@@ -127,7 +131,7 @@ class AddPost extends Component {
                         </button>
                       </form>;
     return (
-      user ? add_posts : null
+      user.id ? add_posts : null
     );
   };
 };
@@ -140,8 +144,15 @@ const mapDispatchToProps = ( dispatch ) => {
 
 const mapStateToProps = ( state ) => {
   return {
-    state
+    posts: state.posts,
+    user: state.user
   }
 };
+
+AddPost.propTypes = {
+  dispatch: PropTypes.func,
+  posts: PropTypes.array,
+  user: PropTypes.object
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPost);

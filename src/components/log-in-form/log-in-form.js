@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { authUser, signOut } from './../../actions';
 
 import { connect } from 'react-redux';
@@ -45,9 +47,10 @@ class LogInForm extends Component {
   }
 
   render() {
-    const { user } = this.props.state;
+    const { user } = this.props;
     
-    if (user) {
+    // Если пользователь авторизован, заменяем форму логина на возможность выхода
+    if (user.id) {
       return <div className="sign-out" onClick={this.signOut}>SING OUT</div>
     }
  
@@ -89,8 +92,14 @@ const mapDispatchToProps = ( dispatch ) => {
 
 const mapStateToProps = ( state ) => {
   return {
-    state
+    user: state.user
   }
 };
+
+
+LogInForm.propTypes = {
+  dispatch: PropTypes.func,
+  user: PropTypes.object
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
