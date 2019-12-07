@@ -1,4 +1,4 @@
-import { db, auth, database, firebase } from './../../src/firebase';
+import { db, auth, firebase } from './../../src/firebase';
 
 const inc = () => {
   return {
@@ -13,7 +13,7 @@ const dec = () => {
 };
 
 const postsLoaded = () => {
-  return async (dispatch, newState) => {
+  return async (dispatch) => {
     let newData = [];
 
     await db.collection('posts').get().then(qs => {
@@ -24,39 +24,39 @@ const postsLoaded = () => {
       type: 'POSTS_LOADED',
       payload: newData
     });
-  }     
+  };     
 };
 
 const removePost = (newPosts, removedPost) => {
-  return (dispatch, newState) => {
-    db.collection("posts")
-             .doc(removedPost['id'])
-             .delete()
-             .then(() => {
-                dispatch({
-                  type: 'REMOVE_POST',
-                  payload: newPosts
-                })
-              })
-  }
+  return (dispatch) => {
+    db.collection('posts')
+      .doc(removedPost['id'])
+      .delete()
+      .then(() => {
+        dispatch({
+          type: 'REMOVE_POST',
+          payload: newPosts
+        });
+      });
+  };
 };
 
 const addPost = (oldPosts, id, formattedTitle, formattedPost) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     let newPosts,
-        newPost = {
-          id,
-          title: formattedTitle,
-          content: formattedPost,
-          date: new Date()
-        };
+      newPost = {
+        id,
+        title: formattedTitle,
+        content: formattedPost,
+        date: new Date()
+      };
     
     newPosts = [
       ...oldPosts,
       newPost
-    ]
+    ];
     //We're accessing the firestore
-    db.collection("posts").doc(`${id}`).set({
+    db.collection('posts').doc(`${id}`).set({
       id,
       title: formattedTitle,
       content: formattedPost,
@@ -67,37 +67,37 @@ const addPost = (oldPosts, id, formattedTitle, formattedPost) => {
         type: 'ADD_POST',
         payload: newPosts
       });
-    })
+    });
 
     
-  }
+  };
 };
 
 const authUser = (email, password) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     auth.signInWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
-      alert(errorMessage);
+      alert(errorCode, errorMessage);
       // ...
     })
-    .then(() => {
-      const user = auth.currentUser;
+      .then(() => {
+        const user = auth.currentUser;
 
-      if(user) {
-        const currentUser = {
-          userName: user.email,
-          id: user.uid
-        }
+        if(user) {
+          const currentUser = {
+            userName: user.email,
+            id: user.uid
+          };
         
-        dispatch({
-          type: 'AUTH_USER',
-          payload: currentUser
-        })
-      }
-    });
-  }
+          dispatch({
+            type: 'AUTH_USER',
+            payload: currentUser
+          });
+        }
+      });
+  };
 };
 
 const signOut = () => {
@@ -112,9 +112,10 @@ const signOut = () => {
       });
     }).catch(function(error) {
       // An error happened.
+      throw new Error(error);
     });
-  }
-}
+  };
+};
 
 export {
   inc,

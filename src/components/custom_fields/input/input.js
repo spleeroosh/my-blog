@@ -12,7 +12,7 @@ class Input extends Component {
       onInputChange } = this.props;
 
     let input_label,
-        input_small_text;
+      input_small_text;
 
     type = type ? type : 'text';
 
@@ -24,16 +24,16 @@ class Input extends Component {
         { label ? input_label : null }
 
         <input  type={type}
-                className={`${class_name} input-form__input input__${type}`}
-                value={title}
-                id={`input__${type}`}
-                aria-describedby={`input__${type}`}
-                placeholder={placeholder ? placeholder : 'введите данные'}
-                onChange={onInputChange}/>
+          className={`${class_name} input-form__input input__${type}`}
+          value={title}
+          id={`input__${type}`}
+          aria-describedby={`input__${type}`}
+          placeholder={placeholder ? placeholder : 'введите данные'}
+          onChange={onInputChange}/>
 
         { small_text.length ? input_small_text : null }
       </div>
-    )
+    );
   }
 }
 
@@ -45,8 +45,8 @@ Input.propTypes = {
   label: PropTypes.string, 
   class_name: PropTypes.string,  
   onInputChange: PropTypes.func,
-}
+};
 
 export {
   Input
-}
+};
