@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import renderer from 'react-test-renderer';
 
@@ -12,15 +13,16 @@ describe('Counter', () => {
     onInputChange = function() {};
 
   test('snapshot renders', () => {
-    const component = renderer.create(<Input 
-      type={type}
-      placeholder={placeholder}
-      title={title}
-      small_text={small_text}
-      label={label}
-      class_name={class_name}
-      onInputChange={onInputChange} 
-    />
+    const component = renderer.create(
+      <Input 
+        type={type}
+        placeholder={placeholder}
+        title={title}
+        small_text={small_text}
+        label={label}
+        class_name={class_name}
+        onInputChange={onInputChange} 
+      />
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

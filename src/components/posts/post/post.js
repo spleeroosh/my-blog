@@ -9,8 +9,8 @@ const Post = ({ post, user, onDeletePost }) => {
   const { id, title, content, date } = post,
     postDate = date.toDate ? date.toDate() : date,
     removeButton =  user ? <div className="post__remove-btn" onClick={() => onDeletePost(id)}>
-                          <img src={buttonSVG} alt="remove button" className="post__remove-btn-image"/>
-                        </div> : null;
+      <img src={buttonSVG} alt="remove button" className="post__remove-btn-image"/>
+    </div> : null;
 
   return (
     <div className="post col-12">
@@ -32,6 +32,6 @@ Post.propTypes = {
   onDeletePost: PropTypes.func,
   post: PropTypes.object,
   user: PropTypes.object
-}
+};
 
 export default Post;

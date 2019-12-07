@@ -10,28 +10,28 @@ import { Input } from './../custom_fields/input';
 class LogInForm extends Component {
   constructor() {
     super();
-
+    
+    this.state = {
+      email: '',
+      password: ''
+    };
+    
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onClick = this.singIn.bind(this);
     this.signOut = this.signOut.bind(this);
   }
 
-  state = {
-    email: '',
-    password: ''
-  }
-
   onEmailChange(e) {
     this.setState({
       email: e.target.value
-    })
+    });
   }
   
   onPasswordChange(e) {
     this.setState({
       password: e.target.value
-    })
+    });
   }
 
   singIn(e) {
@@ -51,7 +51,7 @@ class LogInForm extends Component {
     
     // Если пользователь авторизован, заменяем форму логина на возможность выхода
     if (user.id) {
-      return <div className="sign-out" onClick={this.signOut}>SING OUT</div>
+      return <div className="sign-out" onClick={this.signOut}>SING OUT</div>;
     }
  
     return (
@@ -80,7 +80,7 @@ class LogInForm extends Component {
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -93,13 +93,13 @@ const mapDispatchToProps = ( dispatch ) => {
 const mapStateToProps = ( state ) => {
   return {
     user: state.user
-  }
+  };
 };
 
 
 LogInForm.propTypes = {
   dispatch: PropTypes.func,
   user: PropTypes.object
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);

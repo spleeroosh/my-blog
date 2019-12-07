@@ -11,11 +11,12 @@ import { Textarea } from './../custom_fields/textarea';
 class AddPost extends Component {
   constructor() {
     super();
+    
     this.state = {
       id: null,
       title: '',
       content: ''
-    }
+    };
 
     this.addPost = this.addPost.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
@@ -23,19 +24,21 @@ class AddPost extends Component {
     this.onTabDown = this.onTabDown.bind(this);
   }
   
-  text_area = React.createRef();
+  text_area() {
+    return React.createRef();
+  }
 
   onTitleChange(e) {
     this.setState({
       title: e.target.value.toUpperCase()
     });
-  };
+  }
 
   onPostChange(e) {
     this.setState({
       content:  e.target.value
     });
-  };
+  }
 
   clearForm() {
     this.setState({
@@ -43,7 +46,7 @@ class AddPost extends Component {
       title: '',
       content: ''
     });
-  };
+  }
 
   /**
    * Получаем заголовок и текст из состояния,
@@ -54,17 +57,17 @@ class AddPost extends Component {
   addPost(e) {
     e.preventDefault();
     const id = uuid(),
-        { title, content } = this.state,
-        { dispatch } = this.props,
-        { posts } = this.props,
-        { formattedTitle, formattedContent } = this.formattedText(title, content),
-        oldPosts = posts.map((post) => {
-          return { ...post };
-        });
+      { title, content } = this.state,
+      { dispatch } = this.props,
+      { posts } = this.props,
+      { formattedTitle, formattedContent } = this.formattedText(title, content),
+      oldPosts = posts.map((post) => {
+        return { ...post };
+      });
     
     dispatch(addPost(oldPosts, id, formattedTitle, formattedContent));
     this.clearForm();
-  };
+  }
 
   /**
    * Форматируем заголовок, и текст, добавляя пробелы, и переносы строк
@@ -75,13 +78,13 @@ class AddPost extends Component {
   formattedText(title, content) {
     const formattedTitle = title.replace(/ /g, '&nbsp;');
     const formattedContent = content.replace(/ /g, '&nbsp;')
-                                    .replace(/\n/g, "<br />")
-                                    .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
+      .replace(/\n/g, '<br />')
+      .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
     return {
       formattedTitle,
       formattedContent
-    }
-  };
+    };
+  }
 
   /**
    * Функция, добавляющая табуляцию в textarea
@@ -98,8 +101,8 @@ class AddPost extends Component {
           content: value.substring(0, start) + '\t' + value.substring(end)
         };
       });
-    };
-  };
+    }
+  }
 
   render() {
 
@@ -108,33 +111,33 @@ class AddPost extends Component {
     const { onTitleChange, addPost, onPostChange, onTabDown, text_area } = this;
     
     const add_posts = <form action="submit" className="container col-9 add-form">
-                        <fieldset>
-                          <Input type={'text'} 
-                            placeholder={'Введите название статьи'}
-                            title={title}
-                            small_text={''}
-                            label={''}
-                            class_name={'add-form__input'}
-                            onInputChange={onTitleChange}/>
+      <fieldset>
+        <Input type={'text'} 
+          placeholder={'Введите название статьи'}
+          title={title}
+          small_text={''}
+          label={''}
+          class_name={'add-form__input'}
+          onInputChange={onTitleChange}/>
 
-                          <Textarea onPostChange={onPostChange}
-                                    onTabDown={onTabDown}
-                                    text_area={text_area}
-                                    content={content}
-                                    rows={'7'}
-                                    placeholder={'Введите текст статьи'}
-                                    class_name={'add-form__textarea'}
-                                    id={'add-form__textarea'}/>
-                        </fieldset>
-                        <button type="button" className="btn"
-                                onClick={addPost}>+
-                        </button>
-                      </form>;
+        <Textarea onPostChange={onPostChange}
+          onTabDown={onTabDown}
+          text_area={text_area}
+          content={content}
+          rows={'7'}
+          placeholder={'Введите текст статьи'}
+          class_name={'add-form__textarea'}
+          id={'add-form__textarea'}/>
+      </fieldset>
+      <button type="button" className="btn"
+        onClick={addPost}>+
+      </button>
+    </form>;
     return (
       user.id ? add_posts : null
     );
-  };
-};
+  }
+}
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
@@ -146,13 +149,13 @@ const mapStateToProps = ( state ) => {
   return {
     posts: state.posts,
     user: state.user
-  }
+  };
 };
 
 AddPost.propTypes = {
   dispatch: PropTypes.func,
   posts: PropTypes.array,
   user: PropTypes.object
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPost);
