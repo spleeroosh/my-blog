@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Input extends Component {
   render() {
@@ -20,7 +21,7 @@ class Input extends Component {
   
     return(
       <div className="input-form">
-        { label.length ? input_label : null }
+        { label ? input_label : null }
 
         <input  type={type}
                 className={`${class_name} input-form__input input__${type}`}
@@ -34,6 +35,16 @@ class Input extends Component {
       </div>
     )
   }
+}
+
+Input.propTypes = {
+  type: PropTypes.string, 
+  placeholder: PropTypes.string, 
+  title: PropTypes.string,
+  small_text: PropTypes.string, 
+  label: PropTypes.string, 
+  class_name: PropTypes.string,  
+  onInputChange: PropTypes.func,
 }
 
 export {

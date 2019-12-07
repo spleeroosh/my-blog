@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter snapshot renders 1`] = `
+<div
+  className="input-form"
+>
+  <label
+    htmlFor="input__text"
+  >
+    label
+  </label>
+  <input
+    aria-describedby="input__text"
+    className="text input input-form__input input__text"
+    id="input__text"
+    onChange={[Function]}
+    placeholder="insert your text"
+    type="text"
+    value="title"
+  />
+  <small
+    className="form-text text-muted"
+    id="input__text"
+  >
+    small text
+  </small>
+</div>
+`;

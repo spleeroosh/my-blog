@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter snapshot renders 1`] = `
+<div
+  className="post col-12"
+>
+  <div
+    className="post__header"
+  >
+    <div
+      className="post__content"
+    >
+      <h4
+        className="post__heading"
+      >
+        post-title
+      </h4>
+      <h6
+        className="post__date"
+      >
+        17:18:24 GMT+0300 (GMT+03:00)
+      </h6>
+    </div>
+    <div
+      className="post__remove-btn"
+      onClick={[Function]}
+    >
+      <img
+        alt="remove button"
+        className="post__remove-btn-image"
+        src="remove-button.svg"
+      />
+    </div>
+  </div>
+  <div
+    className="post__body"
+  >
+    <p
+      className="post__paragraph"
+    >
+      post-content
+    </p>
+  </div>
+</div>
+`;
