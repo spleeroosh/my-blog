@@ -18,16 +18,13 @@ class AddPost extends Component {
       content: ''
     };
 
+    this.text_area = React.createRef();
     this.addPost = this.addPost.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onPostChange = this.onPostChange.bind(this);
     this.onTabDown = this.onTabDown.bind(this);
   }
   
-  text_area() {
-    return React.createRef();
-  }
-
   onTitleChange(e) {
     this.setState({
       title: e.target.value.toUpperCase()

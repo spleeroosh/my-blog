@@ -34,10 +34,11 @@ class Posts extends Component {
   render() {
     const { posts, user } = this.props;
     const { onDeletePost } = this;
-    const loading = <div className="sign-out loader">loading...</div>
+    const loading = <div className="sign-out loader">loading...</div>;
     const postsComponent = <section className="posts container">
-                             {posts.map(post => <Post post={post} user={user} onDeletePost={onDeletePost} key={post['id']}/>)}
-                           </section>;
+      {posts.map(post => <Post post={post} user={user} onDeletePost={onDeletePost} key={post['id']}/>)}
+    </section>;
+    
     return (
       <React.Fragment>
         { posts.length ? postsComponent : loading }
@@ -45,25 +46,25 @@ class Posts extends Component {
       </React.Fragment>
     );
   }
-};
+}
 
 const mapStateToProps = ( state ) => {
   return {
     posts: state.posts,
     user: state.user
-  }
+  };
 };
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
     dispatch
-  }
+  };
 };
 
 Posts.propTypes = {
   dispatch: PropTypes.func,
   posts: PropTypes.array,
   user: PropTypes.object
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

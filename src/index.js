@@ -11,11 +11,11 @@ import './scss/main.scss';
 
 ReactDOM.render(
   <Provider store={store}>
-        <Router>
-          <App />
-        </Router>
+    <Router>
+      <App />
+    </Router>
   </Provider>, 
-  document.getElementById('root'))
+  document.getElementById('root'));
 
 
 

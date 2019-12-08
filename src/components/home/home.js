@@ -6,7 +6,7 @@ const Home = () => {
       <div>YOU ARE WELCOME, MY NAME IS PAVEL</div>
       <div>I AM A FRONTEND DEVELOPER</div>
     </section>
-  )
-}
+  );
+};
 
 export default Home;

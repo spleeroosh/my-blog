@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import './header.css';
 
 import NavBar from './../nav-bar';
 
 class Header extends Component {
-
-  headerRef = React.createRef();
+  constructor() {
+    super();
+    this.headerRef = React.createRef();
+  }
 
   componentDidMount() {
     this.headerRef.current.lastChild.style.width = `${this.headerRef.current.clientWidth}px`;
-    window.addEventListener('resize', (e) => {
+    window.addEventListener('resize', () => {
       this.headerRef.current.lastChild.style.width = `${this.headerRef.current.clientWidth}px`;
-    })
+    });
   }
   render() {
     return (
