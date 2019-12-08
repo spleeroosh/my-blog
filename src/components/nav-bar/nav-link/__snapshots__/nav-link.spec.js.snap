@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter snapshot renders 1`] = `
+<li
+  className="navbar__item"
+>
+  <a
+    className="navbar__link"
+    href="/"
+    onClick={[Function]}
+  >
+    HOME
+  </a>
+</li>
+`;

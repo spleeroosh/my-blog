@@ -18,7 +18,7 @@ exports[`Counter snapshot renders 1`] = `
       <h6
         className="post__date"
       >
-        17:18:24 GMT+0300 (GMT+03:00)
+        12:55:02 GMT+0300 (GMT+03:00)
       </h6>
     </div>
     <div

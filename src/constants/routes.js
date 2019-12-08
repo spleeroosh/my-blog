@@ -1,6 +1,22 @@
-export const LANDING = '/';
-export const SIGN_UP = '/signup';
-export const SING_IN = '/signin';
-export const HOME = '/home';
-export const ACCOUNT = '/account';
-export const ADMIN = '/admin';
+const LINKS = {
+  HOME: {
+    NAME: 'HOME',
+    ROUTE: '/' 
+  },
+  LOG_IN: {
+    NAME: 'LOG IN',
+    ROUTE: '/login' 
+  },
+  ABOUT: {
+    NAME: 'ABOUT',
+    ROUTE: '/about' 
+  },
+  BLOG: {
+    NAME: 'BLOG',
+    ROUTE: '/blog' 
+  },
+};
+
+export {
+  LINKS
+}
