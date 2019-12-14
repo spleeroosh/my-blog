@@ -1,3 +1,4 @@
+//Кнопки для навбара
 const LINKS = {
   HOME: {
     NAME: 'HOME',
@@ -19,4 +20,4 @@ const LINKS = {
 
 export {
   LINKS
-}
+};
