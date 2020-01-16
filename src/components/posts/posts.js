@@ -17,8 +17,8 @@ class Posts extends Component {
     const { dispatch } = this.props;
     const { posts } = this.props;
     const newPosts = posts.filter(post => post.id !== id);
-    const removedPost = posts.filter(post => post.id === id)[0];
-    
+    const removedPost = posts.reduce((removed_post, post) => removed_post.id === id ? removed_post : post, {});
+
     dispatch(removePost(newPosts, removedPost));
   }
 

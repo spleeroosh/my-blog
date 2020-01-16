@@ -5,7 +5,7 @@ import { RemoveBtn } from './../../../buttons/remove_btn';
 
 const PostHeader = ({ title, id, date, onDeletePost, user }) => {
   const postDate = date.toDate ? date.toDate() : date,
-    removeButton = user ? <RemoveBtn onDeletePost={onDeletePost} id={id}/> : null;
+    removeButton = user.id ? <RemoveBtn onDeletePost={onDeletePost} id={id}/> : null;
 
   return (
     <div className="post__header">
