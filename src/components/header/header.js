@@ -8,12 +8,17 @@ class Header extends Component {
     this.headerRef = React.createRef();
   }
 
-  componentDidMount() {
+  onHeaderResize = () => {
     this.headerRef.current.lastChild.style.width = `${this.headerRef.current.clientWidth}px`;
     window.addEventListener('resize', () => {
       this.headerRef.current.lastChild.style.width = `${this.headerRef.current.clientWidth}px`;
     });
   }
+  
+  componentDidMount() {
+    this.onHeaderResize();
+  }
+  
   render() {
     return (
       <header ref={this.headerRef}>
