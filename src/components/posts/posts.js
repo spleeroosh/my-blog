@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import _ from 'lodash';
 
 import { connect } from "react-redux";
 import { removePost, postsLoaded } from "./../../actions";
@@ -39,7 +40,7 @@ class Posts extends Component {
     const loading = <div className="sign-out loader">loading...</div>;
     const postsComponent = (
       <section className="posts container">
-        {posts.map(post => (
+        {_.map(posts, post => (
           <Post
             post={post}
             user={user}
