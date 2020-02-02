@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
+import _ from 'lodash';
 
 import { connect } from 'react-redux';
 import { addPost } from './../../actions/index';
@@ -58,9 +59,7 @@ class AddPost extends Component {
       { dispatch } = this.props,
       { posts } = this.props,
       { formattedTitle, formattedContent } = this.formattedText(title, content),
-      oldPosts = posts.map((post) => {
-        return { ...post };
-      });
+      oldPosts = _.cloneDeep(posts);
     
     dispatch(addPost(oldPosts, id, formattedTitle, formattedContent));
     this.clearForm();
@@ -73,10 +72,10 @@ class AddPost extends Component {
    * @returns {Object} Возвращаем объект с отформатированным заголовком, и текстом
    */
   formattedText(title, content) {
-    const formattedTitle = title.replace(/ /g, '&nbsp;');
-    const formattedContent = content.replace(/ /g, '&nbsp;')
-      .replace(/\n/g, '<br />')
-      .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
+    const formattedTitle = title.replace(/ /g, '&nbsp;'),
+          formattedContent = content.replace(/ /g, '&nbsp;')
+            .replace(/\n/g, '<br />')
+            .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
     return {
       formattedTitle,
       formattedContent
@@ -93,6 +92,7 @@ class AddPost extends Component {
       let value = this.state.content;
       let start = this.text_area.current.selectionStart;
       let end = this.text_area.current.selectionEnd;
+      
       this.setState(() => {
         return {
           content: value.substring(0, start) + '\t' + value.substring(end)

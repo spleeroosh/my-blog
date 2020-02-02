@@ -16,11 +16,8 @@ class Posts extends Component {
   onDeletePost = id => {
     const { dispatch } = this.props;
     const { posts } = this.props;
-    const newPosts = posts.filter(post => post.id !== id);
-    const removedPost = posts.reduce(
-      (removed_post, post) => (removed_post.id === id ? removed_post : post),
-      {}
-    );
+    const newPosts = _.filter(posts, post => post.id !== id);
+    const removedPost = _.find(posts, (post) => post.id === id);
 
     dispatch(removePost(newPosts, removedPost));
   };
