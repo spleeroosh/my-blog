@@ -1,0 +1,10 @@
+@mixin dividing_strip {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 45rem;
+  height: 1px;
+  border-bottom: solid 1px silver;
+  left: 50%;
+  transform: translateX(-50%);
+}
