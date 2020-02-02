@@ -14,12 +14,12 @@ class Posts extends Component {
    * удаляем статью из массива, и диспатчим новый массив со статьями
    */
   onDeletePost = id => {
-    const { dispatch } = this.props;
-    const { posts } = this.props;
-    const newPosts = _.filter(posts, post => post.id !== id);
-    const removedPost = _.find(posts, (post) => post.id === id);
+    const { dispatch } = this.props,
+          { posts } = this.props,
+          new_posts = _.filter(posts, post => post.id !== id),
+          removed_post = _.find(posts, (post) => post.id === id);
 
-    dispatch(removePost(newPosts, removedPost));
+    dispatch(removePost(new_posts, removed_post));
   };
 
   /**
@@ -32,25 +32,25 @@ class Posts extends Component {
   }
 
   render() {
-    const { posts, user } = this.props;
-    const { onDeletePost } = this;
-    const loading = <div className="sign-out loader">loading...</div>;
-    const postsComponent = (
-      <section className="posts container">
-        {_.map(posts, post => (
-          <Post
-            post={post}
-            user={user}
-            onDeletePost={onDeletePost}
-            key={post['id']}
-          />
-        ))}
-      </section>
-    );
+    const { posts, user } = this.props,
+          { onDeletePost } = this,
+          loading = <div className="sign-out loader">loading...</div>,
+          PostsComponent = (
+            <section className="posts container">
+              {_.map(posts, post => (
+                <Post
+                  post={post}
+                  user={user}
+                  onDeletePost={onDeletePost}
+                  key={post['id']}
+                />
+              ))}
+            </section>
+          );
 
     return (
       <React.Fragment>
-        {posts.length ? postsComponent : loading}
+        {posts.length ? PostsComponent : loading}
         <AddPost />
       </React.Fragment>
     );

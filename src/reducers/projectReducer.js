@@ -1,4 +1,4 @@
-const initState = {
+const init_state = {
   count: 0,
   posts: [],
   user: {
@@ -6,20 +6,8 @@ const initState = {
   }
 };
 
-const projectReducer = (state = initState, action) => {
-  switch (action.type) {
-  case 'INC':
-    return state = {
-      ...state,
-      count: state['count'] + 1,
-    };
-
-  case 'DEC':
-    return {
-      ...state,
-      count: state['count'] > 0 ? state['count'] - 1 : state['count']
-    };
-    
+const projectReducer = (state = init_state, action) => {
+  switch (action.type) {    
   case 'POSTS_LOADED':
     return state = {
       ...state,
@@ -51,7 +39,7 @@ const projectReducer = (state = initState, action) => {
     };
 
   default:
-    return initState;
+    return init_state;
   }
 };
 

@@ -14,86 +14,87 @@ const dec = () => {
 
 const postsLoaded = () => {
   return async (dispatch) => {
-    let newData = [];
+    let new_data = [];
 
     await db.collection('posts').get().then(qs => {
-      qs.forEach(doc => newData.push(doc.data()));
+      qs.forEach(doc => new_data.push(doc.data()));
     });
 
     dispatch({
       type: 'POSTS_LOADED',
-      payload: newData
+      payload: new_data
     });
-  };     
+  };
 };
 
-const removePost = (newPosts, removedPost) => {
+const removePost = (new_posts, removed_post) => {
   return (dispatch) => {
     db.collection('posts')
-      .doc(removedPost['id'])
+      .doc(removed_post['id'])
       .delete()
       .then(() => {
         dispatch({
           type: 'REMOVE_POST',
-          payload: newPosts
+          payload: new_posts
         });
       });
   };
 };
 
-const addPost = (oldPosts, id, formattedTitle, formattedPost) => {
+const addPost = (old_posts, id, formatted_title, formatted_post) => {
   return (dispatch) => {
-    let newPosts,
-      newPost = {
+    let new_posts,
+      new_post = {
         id,
-        title: formattedTitle,
-        content: formattedPost,
+        title: formatted_title,
+        content: formatted_post,
         date: new Date()
       };
-    
-    newPosts = [
-      ...oldPosts,
-      newPost
+
+    new_posts = [
+      ...old_posts,
+      new_post
     ];
     //We're accessing the firestore
     db.collection('posts').doc(`${id}`).set({
       id,
-      title: formattedTitle,
-      content: formattedPost,
+      title: formatted_title,
+      content: formatted_post,
       date: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
       //If data is added successfully to firestore
       dispatch({
         type: 'ADD_POST',
-        payload: newPosts
+        payload: new_posts
       });
     });
 
-    
+
   };
 };
 
 const authUser = (email, password) => {
   return (dispatch) => {
-    auth.signInWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(errorCode, errorMessage);
-      // ...
-    })
+    auth.signInWithEmailAndPassword(email, password)
+      .catch(function (error) {
+        // Handle Errors here.
+        var error_code = error.code;
+        var error_message = error.message;
+        alert(error_code, error_message);
+        // ...
+      })
       .then(() => {
         const user = auth.currentUser;
 
-        if(user) {
-          const currentUser = {
-            userName: user.email,
+        if (user) {
+          const current_user = {
+            user_name: user.email,
             id: user.uid
           };
-        
+
           dispatch({
             type: 'AUTH_USER',
-            payload: currentUser
+            payload: current_user
           });
         }
       });
@@ -102,7 +103,7 @@ const authUser = (email, password) => {
 
 const signOut = () => {
   return (dispatch) => {
-    auth.signOut().then(function() {
+    auth.signOut().then(function () {
       // Sign-out successful.
       dispatch({
         type: 'SIGN_OUT',
@@ -110,7 +111,7 @@ const signOut = () => {
           id: null
         }
       });
-    }).catch(function(error) {
+    }).catch(function (error) {
       // An error happened.
       throw new Error(error);
     });
