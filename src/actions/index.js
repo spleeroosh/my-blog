@@ -1,4 +1,5 @@
 import { db, auth, firebase } from './../../src/firebase';
+import _ from 'lodash';
 
 const inc = () => {
   return {
@@ -101,6 +102,30 @@ const authUser = (email, password) => {
   };
 };
 
+const updateUser = () => {
+  return (dispatch) => {
+    
+    auth.onAuthStateChanged(function(user) {
+    if (_.isObject(auth.currentUser)) {
+      const user = {
+        user_name: auth.currentUser.email,
+        id: auth.currentUser.uid
+      };
+
+      dispatch({
+        type: 'UPDATE_USER',
+        payload: user
+      });
+    } else {
+      dispatch({
+        type: 'UPDATE_USER',
+        payload: null
+      });
+    }
+    });
+  }
+}
+
 const signOut = () => {
   return (dispatch) => {
     auth.signOut().then(function () {
@@ -125,5 +150,6 @@ export {
   removePost,
   addPost,
   authUser,
-  signOut
+  signOut,
+  updateUser
 };  

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
-import { authUser, signOut } from './../../actions';
+import { authUser, signOut, updateUser } from './../../actions';
 
 import { connect } from 'react-redux';
 
@@ -20,6 +21,12 @@ class LogInForm extends Component {
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onClick = this.singIn.bind(this);
     this.signOut = this.signOut.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(updateUser())
   }
 
   onEmailChange(e) {
@@ -48,9 +55,10 @@ class LogInForm extends Component {
 
   render() {
     const { user } = this.props;
+    console.log(user);
     
     // Если пользователь авторизован, заменяем форму логина на возможность выхода
-    if (user.id) {
+    if (!_.isEmpty(user)) {
       return <div className="sign-out" onClick={this.signOut}>SING OUT</div>;
     }
  

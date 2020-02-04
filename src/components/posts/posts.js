@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import _ from 'lodash';
 
 import { connect } from "react-redux";
-import { removePost, postsLoaded } from "./../../actions";
+import { removePost, postsLoaded, updateUser } from "./../../actions";
 
 import AddPost from "../add-post";
 import Post from "./post";
@@ -27,7 +27,7 @@ class Posts extends Component {
    */
   componentDidMount() {
     const { dispatch } = this.props;
-
+    dispatch(updateUser());
     dispatch(postsLoaded());
   }
 

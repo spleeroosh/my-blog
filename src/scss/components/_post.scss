@@ -47,12 +47,14 @@
   &__paragraph {
     font-size: 1rem;
     text-align: left;
+    margin-bottom: 0;
   }
 
   &__remove-btn {
+    cursor: pointer;
+    
     &-image {
       position: absolute;
-      cursor: pointer;
       width: 1.2rem;
       height: 1.2rem;
       top: .2rem;

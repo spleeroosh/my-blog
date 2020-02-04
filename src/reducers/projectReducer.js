@@ -37,6 +37,12 @@ const projectReducer = (state = init_state, action) => {
       ...state,
       user: action.payload
     };
+  
+  case 'UPDATE_USER':
+    return state = {
+      ...state,
+      user: action.payload
+    }
 
   default:
     return init_state;

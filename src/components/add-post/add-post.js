@@ -130,6 +130,7 @@ class AddPost extends Component {
         onClick={addPost}>+
       </button>
     </form>;
+    
     return (
       user.id ? add_posts : null
     );
