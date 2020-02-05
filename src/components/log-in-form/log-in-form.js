@@ -43,8 +43,9 @@ class LogInForm extends Component {
 
   singIn(e) {
     e.preventDefault();
-    const { dispatch } = this.props;
-    const { email, password } = this.state;
+    const { dispatch } = this.props,
+          { email, password } = this.state;
+
     dispatch(authUser(email, password));
   }
 
@@ -55,7 +56,6 @@ class LogInForm extends Component {
 
   render() {
     const { user } = this.props;
-    console.log(user);
     
     // Если пользователь авторизован, заменяем форму логина на возможность выхода
     if (!_.isEmpty(user)) {

@@ -89,9 +89,9 @@ class AddPost extends Component {
   onTabDown(e) {
     if (e.keyCode === 9) {
       e.preventDefault();
-      let value = this.state.content;
-      let start = this.text_area.current.selectionStart;
-      let end = this.text_area.current.selectionEnd;
+      let value = this.state.content,
+          start = this.text_area.current.selectionStart,
+          end = this.text_area.current.selectionEnd;
       
       this.setState(() => {
         return {
@@ -103,36 +103,36 @@ class AddPost extends Component {
 
   render() {
 
-    const { title, content } = this.state;
-    const { user } = this.props;
-    const { onTitleChange, addPost, onPostChange, onTabDown, text_area } = this;
+    const { title, content } = this.state,
+          { user } = this.props,
+          { onTitleChange, addPost, onPostChange, onTabDown, text_area } = this,
     
-    const add_posts = <form action="submit" className="container col-9 add-form">
-      <fieldset>
-        <Input type={'text'} 
-          placeholder={'Введите название статьи'}
-          title={title}
-          small_text={''}
-          label={''}
-          class_name={'add-form__input'}
-          onInputChange={onTitleChange}/>
+          add_post_form = <form action="submit" className="container col-9 add-form">
+            <fieldset>
+              <Input type={'text'} 
+                placeholder={'Введите название статьи'}
+                title={title}
+                small_text={''}
+                label={''}
+                class_name={'add-form__input'}
+                onInputChange={onTitleChange}/>
 
-        <Textarea onPostChange={onPostChange}
-          onTabDown={onTabDown}
-          text_area={text_area}
-          content={content}
-          rows={'7'}
-          placeholder={'Введите текст статьи'}
-          class_name={'add-form__textarea'}
-          id={'add-form__textarea'}/>
-      </fieldset>
-      <button type="button" className="btn"
-        onClick={addPost}>+
-      </button>
-    </form>;
+              <Textarea onPostChange={onPostChange}
+                onTabDown={onTabDown}
+                text_area={text_area}
+                content={content}
+                rows={'7'}
+                placeholder={'Введите текст статьи'}
+                class_name={'add-form__textarea'}
+                id={'add-form__textarea'}/>
+            </fieldset>
+            <button type="button" className="btn"
+              onClick={addPost}>+
+            </button>
+          </form>;
     
     return (
-      user.id ? add_posts : null
+      !_.isEmpty(user) ? add_post_form : null
     );
   }
 }

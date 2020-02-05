@@ -9,9 +9,9 @@ class Input extends Component {
       small_text, 
       label, 
       class_name, 
-      onInputChange } = this.props;
+      onInputChange } = this.props,
 
-    let input_label,
+      input_label,
       input_small_text;
 
     type = type ? type : 'text';

@@ -27,7 +27,9 @@ class Posts extends Component {
    */
   componentDidMount() {
     const { dispatch } = this.props;
+
     dispatch(updateUser());
+    
     dispatch(postsLoaded());
   }
 

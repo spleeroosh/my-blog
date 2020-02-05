@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-class Textarea extends Component {
 
+class Textarea extends Component {
   render() {
     const {
       content,
@@ -13,9 +13,9 @@ class Textarea extends Component {
       label,
       onTabDown, 
       onPostChange
-    } = this.props;
+    } = this.props,
 
-    const textarea_label = <label htmlFor={id} className="textarea-form__label">{label}</label>;
+      textarea_label = <label htmlFor={id} className="textarea-form__label">{label}</label>;
   
     return(
       <div className={`${class_name} textarea-form`}>
