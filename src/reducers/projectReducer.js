@@ -13,6 +13,11 @@ const projectReducer = (state = init_state, action) => {
       ...state,
       posts: action.payload,
     };
+  case 'POSTS_FILTERED':
+    return state = {
+      ...state,
+      posts_filter: action.payload
+    }
 
   case 'REMOVE_POST':
     return state = {

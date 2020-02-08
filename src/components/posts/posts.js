@@ -7,8 +7,13 @@ import { removePost, postsLoaded, updateUser } from "./../../actions";
 
 import AddPost from "../add-post";
 import Post from "./post";
+import SearchBar from './../search_bar/search_bar';
 
 class Posts extends Component {
+  state = {
+    filtered_posts: []
+  }
+
   /**
    * @param {Number} id Получаем id статьи,
    * удаляем статью из массива, и диспатчим новый массив со статьями
@@ -29,31 +34,44 @@ class Posts extends Component {
     const { dispatch } = this.props;
 
     dispatch(updateUser());
-    
+
     dispatch(postsLoaded());
   }
 
+  filterPosts = (posts, posts_filter) => {
+
+  }
+
   render() {
-    const { posts, user } = this.props,
+    const { posts, user, posts_filter } = this.props,
           { onDeletePost } = this,
-          loading = <div className="sign-out loader">loading...</div>,
-          PostsComponent = (
-            <section className="posts container">
-              {_.map(posts, post => (
-                <Post
-                  post={post}
-                  user={user}
-                  onDeletePost={onDeletePost}
-                  key={post['id']}
-                />
-              ))}
-            </section>
-          );
+          loading = <div className="sign-out loader">loading...</div>;
+    let PostsComponent,
+        filtered_posts;
+    
+    if (!_.isEmpty(posts)) {
+      filtered_posts = _.isUndefined(posts_filter) ? posts : _.filter(posts, (post) => _.includes(_.toLower(post.title), _.toLower(posts_filter)));
+
+      PostsComponent = (
+        <section className="posts container">
+          {_.map(filtered_posts, post => (
+            <Post
+              post={post}
+              user={user}
+              onDeletePost={onDeletePost}
+              key={post['id']}
+            />
+          ))}
+        </section>
+      );
+    }
 
     return (
       <React.Fragment>
+        <SearchBar />
         {posts.length ? PostsComponent : loading}
         <AddPost />
+
       </React.Fragment>
     );
   }
@@ -61,6 +79,7 @@ class Posts extends Component {
 
 const mapStateToProps = state => {
   return {
+    posts_filter: state.posts_filter,
     posts: state.posts,
     user: state.user
   };

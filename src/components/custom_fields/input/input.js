@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import _ from 'lodash';
+
 class Input extends Component {
   render() {
     let { type, 
@@ -31,7 +33,7 @@ class Input extends Component {
           placeholder={placeholder ? placeholder : 'введите данные'}
           onChange={onInputChange}/>
 
-        { small_text.length ? input_small_text : null }
+        { _.isString(small_text) ? input_small_text : null }
       </div>
     );
   }
