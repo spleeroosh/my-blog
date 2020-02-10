@@ -14,7 +14,7 @@ const Post = ({ post, user, onDeletePost }) => {
       <div className="post__body">
         <p className="post__paragraph">{ReactHtmlParser(content)}</p>
       </div>
-    </div>    
+    </div>
   );
 };
 

@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-import { connect } from "react-redux";
-import { removePost, postsLoaded, updateUser } from "./../../actions";
+import { connect } from 'react-redux';
+import { removePost, postsLoaded, updateUser } from './../../actions';
 
-import AddPost from "../add-post";
-import Post from "./post";
+import AddPost from '../add-post';
+import Post from './post';
 import SearchBar from './../search_bar/search_bar';
 
 class Posts extends Component {
@@ -20,9 +20,9 @@ class Posts extends Component {
    */
   onDeletePost = id => {
     const { dispatch } = this.props,
-          { posts } = this.props,
-          new_posts = _.filter(posts, post => post.id !== id),
-          removed_post = _.find(posts, (post) => post.id === id);
+      { posts } = this.props,
+      new_posts = _.filter(posts, post => post.id !== id),
+      removed_post = _.find(posts, (post) => post.id === id);
 
     dispatch(removePost(new_posts, removed_post));
   };
@@ -39,18 +39,26 @@ class Posts extends Component {
   }
 
   filterPosts = (posts, posts_filter) => {
-
+    return _.isUndefined(posts_filter) ? 
+      posts : 
+      _.filter(
+        posts, 
+        (post) => _.includes(
+          _.toLower(post.title),
+          _.toLower(posts_filter)
+        )
+      );
   }
 
   render() {
     const { posts, user, posts_filter } = this.props,
-          { onDeletePost } = this,
-          loading = <div className="sign-out loader">loading...</div>;
+      { onDeletePost } = this,
+      loading = <div className="sign-out loader">loading...</div>;
     let PostsComponent,
-        filtered_posts;
+      filtered_posts;
     
     if (!_.isEmpty(posts)) {
-      filtered_posts = _.isUndefined(posts_filter) ? posts : _.filter(posts, (post) => _.includes(_.toLower(post.title), _.toLower(posts_filter)));
+      filtered_posts = this.filterPosts(posts, posts_filter);
 
       PostsComponent = (
         <section className="posts container">
@@ -92,6 +100,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 Posts.propTypes = {
+  posts_filter: PropTypes.string,
   dispatch: PropTypes.func,
   posts: PropTypes.array,
   user: PropTypes.object

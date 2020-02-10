@@ -17,7 +17,7 @@ const projectReducer = (state = init_state, action) => {
     return state = {
       ...state,
       posts_filter: action.payload
-    }
+    };
 
   case 'REMOVE_POST':
     return state = {
@@ -47,7 +47,7 @@ const projectReducer = (state = init_state, action) => {
     return state = {
       ...state,
       user: action.payload
-    }
+    };
 
   default:
     return init_state;

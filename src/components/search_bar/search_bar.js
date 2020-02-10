@@ -6,19 +6,19 @@ import { Input } from './../custom_fields/input';
 const SearchBar = () => {
   const dispatch = useDispatch();
 
-  const onSearchPost = (event) => {
+  const onSearchPost = (event) => {  
     dispatch({
       type: 'POSTS_FILTERED',
       payload: event.target.value
     });
-  }
+  };
 
   return (
-      <div className="search-bar">
-        <Input 
+    <div className="search-bar">
+      <Input 
         type='text'
         onInputChange={onSearchPost}/>
-      </div>
+    </div>
   );
 };
 
