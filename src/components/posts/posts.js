@@ -10,10 +10,6 @@ import Post from './post';
 import SearchBar from './../search_bar/search_bar';
 
 class Posts extends Component {
-  state = {
-    filtered_posts: []
-  }
-
   /**
    * @param {Number} id Получаем id статьи,
    * удаляем статью из массива, и диспатчим новый массив со статьями
@@ -38,15 +34,29 @@ class Posts extends Component {
     dispatch(postsLoaded());
   }
 
+  componentWillMount() {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'POSTS_FILTERED',
+      payload: null
+    })
+    
+  }
+
   filterPosts = (posts, posts_filter) => {
-    return _.isUndefined(posts_filter) ? 
+    return _.isNull(posts_filter) ? 
       posts : 
       _.filter(
         posts, 
-        (post) => _.includes(
-          _.toLower(post.title),
-          _.toLower(posts_filter)
-        )
+        (post) => {
+          let title = post.title.replace(/&nbsp;/g, ' ');
+
+          return _.includes(
+            _.toLower(title),
+            _.toLower(posts_filter)
+          )
+        }
       );
   }
 

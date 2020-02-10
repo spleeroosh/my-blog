@@ -17,7 +17,8 @@ const SearchBar = () => {
     <div className="search-bar">
       <Input 
         type='text'
-        onInputChange={onSearchPost}/>
+        onInputChange={onSearchPost}
+      />
     </div>
   );
 };

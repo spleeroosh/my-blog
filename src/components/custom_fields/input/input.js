@@ -6,12 +6,12 @@ import _ from 'lodash';
 class Input extends Component {
   render() {
     let { type, 
-      placeholder, 
-      title,
-      small_text, 
-      label, 
-      class_name, 
-      onInputChange } = this.props,
+        placeholder, 
+        title,
+        small_text, 
+        label, 
+        class_name, 
+        onInputChange } = this.props,
 
       input_label,
       input_small_text;
@@ -31,7 +31,8 @@ class Input extends Component {
           id={`input__${type}`}
           aria-describedby={`input__${type}`}
           placeholder={placeholder ? placeholder : 'введите данные'}
-          onChange={onInputChange}/>
+          onChange={onInputChange}
+        />
 
         { _.isString(small_text) ? input_small_text : null }
       </div>
