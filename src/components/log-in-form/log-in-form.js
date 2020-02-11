@@ -26,7 +26,7 @@ class LogInForm extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
-    dispatch(updateUser())
+    dispatch(updateUser());
   }
 
   onEmailChange(e) {
@@ -44,7 +44,7 @@ class LogInForm extends Component {
   singIn(e) {
     e.preventDefault();
     const { dispatch } = this.props,
-          { email, password } = this.state;
+      { email, password } = this.state;
 
     dispatch(authUser(email, password));
   }

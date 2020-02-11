@@ -34,14 +34,13 @@ class Posts extends Component {
     dispatch(postsLoaded());
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { dispatch } = this.props;
 
     dispatch({
       type: 'POSTS_FILTERED',
       payload: null
-    })
-    
+    });
   }
 
   filterPosts = (posts, posts_filter) => {
@@ -55,7 +54,7 @@ class Posts extends Component {
           return _.includes(
             _.toLower(title),
             _.toLower(posts_filter)
-          )
+          );
         }
       );
   }
