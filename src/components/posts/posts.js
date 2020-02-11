@@ -7,7 +7,6 @@ import { removePost, postsLoaded, updateUser } from './../../actions';
 
 import AddPost from '../add-post';
 import Post from './post';
-import SearchBar from './../search_bar/search_bar';
 
 class Posts extends Component {
   /**
@@ -85,10 +84,8 @@ class Posts extends Component {
 
     return (
       <React.Fragment>
-        <SearchBar />
         {posts.length ? PostsComponent : loading}
         <AddPost />
-
       </React.Fragment>
     );
   }
