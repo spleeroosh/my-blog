@@ -13,11 +13,11 @@ const NavLinks = () => {
   return (
     <ul className="navbar__list">
       {_.map(LINKS, (link) => 
-          <NavLink key={uuid()}
-            link_name={link.NAME} 
-            link_route={link.ROUTE} 
-          />
-        )}
+        <NavLink key={uuid()}
+          link_name={link.NAME} 
+          link_route={link.ROUTE} 
+        />
+      )}
     </ul>
   );
 };

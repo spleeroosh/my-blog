@@ -3,7 +3,8 @@ const init_state = {
   posts: [],
   user: {
     id: false
-  }
+  },
+  is_searchbar: false
 };
 
 const projectReducer = (state = init_state, action) => {
@@ -47,6 +48,12 @@ const projectReducer = (state = init_state, action) => {
     return state = {
       ...state,
       user: action.payload
+    };
+
+  case 'SHOW_SEARCH_BAR':
+    return state = {
+      ...state,
+      is_searchbar: action.payload
     };
 
   default:

@@ -28,7 +28,7 @@ class Input extends Component {
         <input  type={type}
           className={`${class_name} input-form__input input__${type}`}
           value={title}
-          id={`input__${type}`}
+          // id={`input__${type}`}
           aria-describedby={`input__${type}`}
           placeholder={placeholder ? placeholder : 'введите данные'}
           onChange={onInputChange}
