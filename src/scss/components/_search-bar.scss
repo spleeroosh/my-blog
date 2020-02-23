@@ -1,15 +1,23 @@
 .search-bar {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  align-self: flex-end;
   margin-right: 1rem;
-  width: 0;
-
-  & .input-form {
-    width: 30rem;
-  }
+  margin-left: auto;
+  width: auto;
 
   &__icon {
-    width: 1.6rem;
-    margin-right: 3rem;
+    cursor: pointer;
+    width: 24px;
+    margin-right: 1rem;
+    position: relative;
+    z-index: 15;
+  }
+
+  &__input {
+    position: relative;
+    box-sizing: border-box;
+    z-index: 10;
+    margin-right: 1rem;
   }
 }

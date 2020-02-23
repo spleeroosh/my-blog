@@ -14,7 +14,7 @@ const SearchBar = () => {
 
   let props = useSpring({ 
     config: { duration: 600 }, 
-    width: is_searchbar ? 500 : 0, 
+    width: is_searchbar ? 250 : 0, 
     opacity: is_searchbar ? 1 : 0,
     from: {width: 0, opacity: 0}
   });
@@ -34,15 +34,15 @@ const SearchBar = () => {
   };
 
   return (
-    <React.Fragment>
-      <animated.div style={props} className="search-bar">
+    <div className="search-bar">
+      <animated.div style={props} className="search-bar__input">
         <Input 
           type='text'
           onInputChange={onSearchPost}
         />
       </animated.div>
       <img className="search-bar__icon" src={loupeSVG} onClick={toggleSearchBar}/>
-    </React.Fragment>
+    </div>
   );
 };
 
