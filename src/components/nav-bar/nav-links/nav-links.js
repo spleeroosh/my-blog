@@ -11,14 +11,20 @@ import _ from 'lodash';
  */
 const NavLinks = () => {
   return (
-    <ul className="navbar__list">
-      {_.map(LINKS, (link) => 
-        <NavLink key={uuid()}
-          link_name={link.NAME} 
-          link_route={link.ROUTE} 
-        />
-      )}
-    </ul>
+    <React.Fragment>
+      <input type="checkbox" className="navbar__checkbox" id="navbar-toggle"></input>
+      <label htmlFor="navbar-toggle" className="navbar__button"></label>
+      <div className="navbar__background">&nbsp;</div>
+
+      <ul className="navbar__list">
+        {_.map(LINKS, (link) => 
+          <NavLink key={uuid()}
+            link_name={link.NAME} 
+            link_route={link.ROUTE}
+          />
+        )}
+      </ul>
+    </React.Fragment>
   );
 };
 

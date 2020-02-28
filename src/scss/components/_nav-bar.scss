@@ -5,7 +5,53 @@
   box-shadow: 0 6px 8px 1px rgba(0, 0, 0, .6);
   position: fixed;
   z-index: 1000;
+  min-height: 34px;
   top: 0;
+
+  &__background {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 50%;
+    left: 20px;
+    background-color: rgba($color-tertiary, 1)  ;
+    transition: transform .5s;
+    z-index: 100;
+  }
+
+  &__button {
+    display: none;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: rgba($color-tertiary, 1);
+    cursor: pointer;
+
+
+    @media screen and (max-width: $mobile-resolution) {
+      display: flex;
+    }
+  }
+
+  &__checkbox {
+    display: none;
+
+    &:checked ~ .navbar__background {
+      transform: scale(250);
+    }
+
+
+    &:checked ~ .navbar__list {
+      display: flex;
+    }
+
+    &:checked ~ .navbar__button {
+      background-color: $color-primary;
+      z-index: 150;
+      position: absolute;
+      right: 30px;
+    }
+  }
 
   &__list {
     display: flex;
@@ -13,16 +59,39 @@
     padding: 0;
     width: calc(100%/2 - #{$header-gap});
     list-style-type: none;
+
+    @media screen and (max-width: $mobile-resolution) {
+      display: none;
+      position: fixed;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      width: 100vw;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      font-size: 1.4rem;
+      padding-top: 10rem;
+    }
   }
 
   &__item {
     padding: .5rem;
+
+    @media screen and (max-width: $mobile-resolution) {
+      margin-bottom: 2rem;
+    }
   }
 
   &__link {
     position: relative;
     color: $color-secondary;
     padding: .5rem 0;
+
+    @media screen and (max-width: $mobile-resolution) {
+      color: $color-primary;
+    }
 
     &:after {
       content: '';
