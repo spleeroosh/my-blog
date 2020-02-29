@@ -1,0 +1,44 @@
+@keyframes leftToRight {
+  0% {
+    left: 0;
+    transform: translateX(0);
+  }
+
+  80% {
+    left: 100%;
+    transform: translateX(0);
+  }
+
+  100% {
+    left: 100%;
+    transform: translateX(-130%);
+  }
+}
+
+@keyframes rotateToRight {
+  0% {
+    transform: rotate(0);
+  }
+
+  80% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes rotateToLeft {
+  0% {
+    transform: rotate(0);
+  }
+
+  80% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(-45deg);
+  }
+}

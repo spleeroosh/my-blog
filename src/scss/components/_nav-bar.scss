@@ -100,9 +100,9 @@
       position: relative;
       background-color: $color-primary;
       z-index: 150;
+      animation: leftToRight 1s;
       left: 100%;
       transform: translateX(-130%);
-      transition: all .5s;
     }
 
     &:checked + .navbar__button .navbar__button-burger {
@@ -112,15 +112,16 @@
         border-bottom: 2px solid $color-tertiary;
         width: 1.4rem;
         right: -4px;
-        transition: all .4s;
       }
 
       &:before {
+        animation: rotateToLeft 1s;
         bottom: -2px;
         transform: rotate(-45deg);
       }
 
       &:after {
+        animation: rotateToRight 1s;
         top: -2px;
         transform: rotate(45deg);
       }
@@ -189,8 +190,4 @@
       border-bottom: solid 1.5px rgba($color-tertiary, 1);
     }
   }
-
-  // @media screen and (max-width: $mobile-resolution) {
-  //   flex-direction: column;
-  // }
 }
