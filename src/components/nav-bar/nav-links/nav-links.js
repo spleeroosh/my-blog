@@ -22,11 +22,7 @@ const NavLinks = () => {
 
   return (
     <React.Fragment>
-      { 
-        is_shownav ? 
-          <input type="checkbox" className="navbar__checkbox" id="navbar-toggle" onChange={onToggleNav} checked/> :
-          <input type="checkbox" className="navbar__checkbox" id="navbar-toggle" onChange={onToggleNav}/> 
-      }
+      <input type="checkbox" className="navbar__checkbox" id="navbar-toggle" checked={is_shownav} onChange={onToggleNav}/>
       <label htmlFor="navbar-toggle" className="navbar__button">
         <div className="navbar__button-burger"></div>
       </label>
