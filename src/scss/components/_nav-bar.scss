@@ -28,6 +28,7 @@
 
   &__button {
     display: none;
+    position: relative;
     border-radius: 50%;
     height: 30px;
     width: 30px;
@@ -37,6 +38,19 @@
 
     @media screen and (max-width: $mobile-resolution) {
       display: flex;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width:30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: transparent;
+        z-index: 300;
+      }
     }
 
     &-burger {
