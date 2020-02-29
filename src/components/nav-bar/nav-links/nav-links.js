@@ -13,7 +13,9 @@ const NavLinks = () => {
   return (
     <React.Fragment>
       <input type="checkbox" className="navbar__checkbox" id="navbar-toggle"></input>
-      <label htmlFor="navbar-toggle" className="navbar__button"></label>
+      <label htmlFor="navbar-toggle" className="navbar__button">
+        <div className="navbar__button-burger"></div>
+      </label>
       <div className="navbar__background">&nbsp;</div>
 
       <ul className="navbar__list">
