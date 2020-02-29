@@ -14,7 +14,7 @@ const SearchBar = () => {
 
   let props = useSpring({ 
     config: { duration: 600 }, 
-    width: is_searchbar ? 250 : 0, 
+    width: is_searchbar ? 230 : 0, 
     opacity: is_searchbar ? 1 : 0,
     from: {width: 0, opacity: 0}
   });

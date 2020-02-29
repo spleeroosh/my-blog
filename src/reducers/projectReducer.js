@@ -4,7 +4,8 @@ const init_state = {
   user: {
     id: false
   },
-  is_searchbar: false
+  is_searchbar: false,
+  is_shownav: false
 };
 
 const projectReducer = (state = init_state, action) => {
@@ -54,6 +55,12 @@ const projectReducer = (state = init_state, action) => {
     return state = {
       ...state,
       is_searchbar: action.payload
+    };
+
+  case 'SHOW_NAV_BAR':
+    return state = {
+      ...state,
+      is_shownav: action.payload
     };
 
   default:
