@@ -1,7 +1,6 @@
 @keyframes leftToRight {
   0% {
     left: 0;
-    transform: translateX(0);
   }
 
   80% {
@@ -10,7 +9,6 @@
   }
 
   100% {
-    left: 100%;
     transform: translateX(-130%);
   }
 }
@@ -40,19 +38,5 @@
 
   100% {
     transform: rotate(-45deg);
-  }
-}
-
-@keyframes showNavBar {
-  0% {
-    opacity: 0;
-    transform: scale(1);
-  }
-  30% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(250);
   }
 }

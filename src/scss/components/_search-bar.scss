@@ -1,14 +1,12 @@
 .search-bar {
   display: flex;
   justify-content: flex-end;
-  align-self: flex-end;
   margin-right: -.5rem;
   margin-left: auto;
-  width: auto;
 
   &__icon {
     cursor: pointer;
-    width: 24px;
+    width: 28px;
     margin-right: 1rem;
     position: relative;
     z-index: 15;

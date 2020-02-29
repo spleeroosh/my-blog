@@ -16,7 +16,8 @@ const SearchBar = () => {
     config: { duration: 600 }, 
     width: is_searchbar ? 230 : 0, 
     opacity: is_searchbar ? 1 : 0,
-    from: {width: 0, opacity: 0}
+    display: is_searchbar ? 'block' : 'none',
+    from: {width: 0, opacity: 0, display: 'none'}
   });
 
   const onSearchPost = (event) => {  
