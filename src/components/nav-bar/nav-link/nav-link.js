@@ -13,6 +13,7 @@ const NavLink = ({ link_name, link_route, onToggleNav }) => {
 NavLink.propTypes = {
   link_name: PropTypes.string,
   link_route: PropTypes.string,
+  onToggleNav: PropTypes.func
 };
 
 export {

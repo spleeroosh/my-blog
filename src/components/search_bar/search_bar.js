@@ -7,6 +7,7 @@ import { useSpring, animated } from 'react-spring';
 import loupeSVG from './../../images/search.svg';
 
 import { Input } from './../custom_fields/input';
+import { filteredPosts, showSearchBar } from './../../actions';
 
 const SearchBar = () => {
   const dispatch = useDispatch(),
@@ -21,17 +22,11 @@ const SearchBar = () => {
   });
 
   const onSearchPost = (event) => {  
-    dispatch({
-      type: 'POSTS_FILTERED',
-      payload: event.target.value
-    });
+    dispatch(filteredPosts(event.target.value));
   };
 
   const toggleSearchBar = () => {
-    dispatch({
-      type: 'SHOW_SEARCH_BAR',
-      payload: !is_searchbar
-    });
+    dispatch(showSearchBar(is_searchbar));
   };
 
   return (

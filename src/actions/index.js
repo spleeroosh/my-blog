@@ -13,6 +13,27 @@ const dec = () => {
   };
 };
 
+const showNavBar = (is_shownav) => {
+  return {
+    type: 'SHOW_NAV_BAR',
+    payload: !is_shownav
+  };
+};
+
+const showSearchBar = (is_searchbar) => {
+  return {
+    type: 'SHOW_SEARCH_BAR',
+    payload: !is_searchbar
+  };
+};
+
+const filteredPosts = (keyword) => {
+  return {
+    type: 'POSTS_FILTERED',
+    payload: keyword
+  };
+};
+
 const postsLoaded = () => {
   return async (dispatch) => {
     let new_data = [];
@@ -69,8 +90,6 @@ const addPost = (old_posts, id, formatted_title, formatted_post) => {
         payload: new_posts
       });
     });
-
-
   };
 };
 
@@ -106,25 +125,25 @@ const updateUser = () => {
   return (dispatch) => {
     
     auth.onAuthStateChanged(function(user) {
-    if (_.isObject(auth.currentUser)) {
-      const user = {
-        user_name: auth.currentUser.email,
-        id: auth.currentUser.uid
-      };
+      if (_.isObject(auth.currentUser)) {
+        const user = {
+          user_name: auth.currentUser.email,
+          id: auth.currentUser.uid
+        };
 
-      dispatch({
-        type: 'UPDATE_USER',
-        payload: user
-      });
-    } else {
-      dispatch({
-        type: 'UPDATE_USER',
-        payload: null
-      });
-    }
+        dispatch({
+          type: 'UPDATE_USER',
+          payload: user
+        });
+      } else {
+        dispatch({
+          type: 'UPDATE_USER',
+          payload: null
+        });
+      }
     });
-  }
-}
+  };
+};
 
 const signOut = () => {
   return (dispatch) => {
@@ -146,6 +165,9 @@ const signOut = () => {
 export {
   inc,
   dec,
+  showNavBar,
+  showSearchBar,
+  filteredPosts,
   postsLoaded,
   removePost,
   addPost,

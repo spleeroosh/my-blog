@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import uuid from 'uuid';
+import _ from 'lodash';
 
 import { NavLink } from './../nav-link';
 import { LINKS } from './../../../constants/routes';
-import uuid from 'uuid';
-import _ from 'lodash';
+import { showNavBar } from './../../../actions/';
+
 
 /**
  * Итерируемся по объекту с именами и роутами линков,
@@ -14,10 +16,7 @@ const NavLinks = () => {
   const dispatch = useDispatch(),
     is_shownav = useSelector(state => state.is_shownav),
     onToggleNav = () => {
-      dispatch({
-        type: 'SHOW_NAV_BAR',
-        payload: !is_shownav
-      });
+      dispatch(showNavBar(is_shownav));
     };
 
   return (
