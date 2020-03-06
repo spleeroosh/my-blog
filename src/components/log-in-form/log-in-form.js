@@ -59,7 +59,9 @@ class LogInForm extends Component {
     
     // Если пользователь авторизован, заменяем форму логина на возможность выхода
     if (!_.isEmpty(user)) {
-      return <div className="sign-out" onClick={this.signOut}>SING OUT</div>;
+      return <section className="sign-out">
+        <button className="sign-out-btn btn" onClick={this.signOut}>SING OUT</button>
+      </section>;
     }
  
     return (

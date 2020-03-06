@@ -5,6 +5,8 @@
   color: $color-secondary;
   border-radius: .5rem;
   transition: all .5s;
+  width: 10rem;
+  cursor: pointer;
 
   &:hover {
     border: solid 1px $color-tertiary;
