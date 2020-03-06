@@ -88,6 +88,11 @@
     &:checked ~ .navbar__background {
       transform: scale(250);
       opacity: 1;
+
+      @media screen and (min-width: $mobile-resolution) {
+        transform: scale(1);
+        opacity: 0;
+      }
     }
 
 
