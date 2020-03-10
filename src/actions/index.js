@@ -49,6 +49,21 @@ const postsLoaded = () => {
   };
 };
 
+const aboutLoaded = () => {  
+  return async (dispatch) => {
+    let new_data = [];
+
+    await db.collection('about').get().then(qs => {
+      qs.forEach(doc => new_data.push(doc.data()));
+    });
+    
+    dispatch({
+      type: 'ABOUT_LOADED',
+      payload: new_data
+    });
+  };
+};
+
 const removePost = (new_posts, removed_post) => {
   return (dispatch) => {
     db.collection('posts')
@@ -169,6 +184,7 @@ export {
   showSearchBar,
   filteredPosts,
   postsLoaded,
+  aboutLoaded,
   removePost,
   addPost,
   authUser,

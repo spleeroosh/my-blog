@@ -1,19 +1,19 @@
 //Кнопки для навбара
 const LINKS = {
   HOME: {
-    NAME: 'HOME',
+    NAME: 'ГЛАВНАЯ',
     ROUTE: '/' 
   },
   LOG_IN: {
-    NAME: 'LOG IN',
+    NAME: 'ЗАЙТИ',
     ROUTE: '/login' 
   },
   ABOUT: {
-    NAME: 'ABOUT',
+    NAME: 'Я',
     ROUTE: '/about' 
   },
   BLOG: {
-    NAME: 'BLOG',
+    NAME: 'БЛОГ',
     ROUTE: '/blog' 
   },
 };

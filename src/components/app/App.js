@@ -5,6 +5,7 @@ import Header from '../header';
 import Home from '../home';
 import Posts from '../posts';
 import LogInForm from '../log-in-form';
+import { About } from './../about';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route exact path='/' component={Home} />
           <Route path='/blog' component={Posts} />
           <Route path='/login' component={LogInForm} />
+          <Route path='/about' component={About} />
         </Switch>
       </main>
     </React.Fragment>

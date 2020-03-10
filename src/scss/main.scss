@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Jura:400,700&display=swap&subset=cyrillic,cyrillic-ext');
+
 // ABSTRACT
 @import './abstract/variables.scss';
 @import './abstract/animation';
@@ -24,4 +26,5 @@
 @import './base/base';
 
 // LAYERS
-@import './layers/main-content'
+@import './layers/main-content';
+@import './layers/about';

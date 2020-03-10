@@ -1,6 +1,6 @@
 .posts {
   width: 50rem;
-  margin-top: 10rem;
+  margin-top: $section-top-margin;
   margin-bottom: 3rem;
   box-sizing: border-box;
   margin-left: auto;
@@ -10,6 +10,6 @@
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-top: 6rem;
+    margin-top: $section-top-margin-mob;
   }
 }

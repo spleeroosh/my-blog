@@ -60,7 +60,7 @@ class LogInForm extends Component {
     // Если пользователь авторизован, заменяем форму логина на возможность выхода
     if (!_.isEmpty(user)) {
       return <section className="sign-out">
-        <button className="sign-out-btn btn" onClick={this.signOut}>SING OUT</button>
+        <button className="sign-out-btn btn" onClick={this.signOut}>ВЫЙТИ</button>
       </section>;
     }
  
@@ -85,7 +85,7 @@ class LogInForm extends Component {
                 class_name={'log-in__input'}
                 onInputChange={this.onPasswordChange}/>
 
-              <button type="submit" className="log-in__enter-button btn" onClick={(e) => this.singIn(e)}>Войти</button>
+              <button type="submit" className="log-in__enter-button btn" onClick={(e) => this.singIn(e)}>ЗАЙТИ</button>
             </fieldset>
           </form>
         </div>

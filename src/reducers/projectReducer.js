@@ -1,6 +1,7 @@
 const init_state = {
   count: 0,
   posts: [],
+  about: {},
   user: {
     id: false
   },
@@ -15,6 +16,13 @@ const projectReducer = (state = init_state, action) => {
       ...state,
       posts: action.payload,
     };
+  
+  case 'ABOUT_LOADED':
+    return state = {
+      ...state,
+      about: action.payload,
+    };
+
   case 'POSTS_FILTERED':
     return state = {
       ...state,
