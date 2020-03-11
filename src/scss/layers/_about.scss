@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   display: grid;
-  max-width: 60rem;
+  max-width: $desc-max-width;
   margin: 0 auto;
 
   // grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];
@@ -12,6 +12,10 @@
   grid-template-rows: 40% 200px 500px 200px;
 
   margin-top: $section-top-margin;
+
+  &__title {
+    font-weight: bold;
+  }
 
   &__item {
     box-sizing: border-box;
@@ -27,6 +31,15 @@
 
   &__description {
     font-size: $desc-font-size;
+
+    &-list {
+      list-style: none;
+      font-size: $desc-font-size;
+    }
+
+    &-title {
+      font-weight: bold;
+    }
   }
 
   @media screen and (max-width: $mobile-resolution) {
