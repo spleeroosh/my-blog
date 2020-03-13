@@ -6,12 +6,14 @@ import Home from '../home';
 import Posts from '../posts';
 import LogInForm from '../log-in-form';
 import { About } from './../about';
+import { SocialMedia } from './../social_media';
 
 const App = () => {
   return (
     <React.Fragment>
       <Header />
       <main className='main-content'>
+        <SocialMedia />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/blog' component={Posts} />

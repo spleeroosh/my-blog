@@ -1,0 +1,53 @@
+.social-media {
+  position: fixed;
+  right: 7%;
+  bottom: 50%;
+  transform: translateY(50%);
+  height: 70px;
+  
+  @media screen and (max-width: $mobile-resolution) {
+    bottom: .5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 75;
+    height: 34px;
+    width: 50%;
+    padding: .5rem;
+    border-radius: .5rem;
+    background-color: rgba($color-primary, .7);
+  }
+
+  &__list {
+    display: grid;
+    grid-gap: 1.5rem;
+    list-style: none;
+    fill: $color-tertiary;
+
+    @media screen and (max-width: $mobile-resolution) {
+      grid-template-columns: calc(50% - .7rem) calc(50% - .7rem);
+    }
+  }
+
+  &__item {
+    @media screen and (max-width: $mobile-resolution) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+  }
+
+  &__link svg {
+    width: 2rem;
+    height: 2rem;
+    fill: rgba($color-tertiary, .7);
+
+    &:hover {
+      fill: $color-tertiary;
+    }
+
+    @media screen and (max-width: $mobile-resolution) {
+      fill: $color-tertiary;
+    }
+  }
+}
