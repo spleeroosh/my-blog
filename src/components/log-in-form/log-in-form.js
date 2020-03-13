@@ -65,29 +65,31 @@ class LogInForm extends Component {
     }
  
     return (
-      <div className="card mb-3 log-in">
-        <div className="card-header log-in__header">Введите почту и пароль для входа</div>
-        <div className="card-body">
-          <form className="log-in__form">
-            <fieldset>
+      <div className="log-in">
+        <div className="card mb-3">
+          <div className="card-header log-in__header">Введите почту и пароль для входа</div>
+          <div className="card-body">
+            <form className="log-in__form">
+              <fieldset>
 
-              <Input type={'email'} 
-                placeholder={'Введите почту'}
-                small_text={''}
-                label={''}
-                class_name={'log-in__input'}
-                onInputChange={this.onEmailChange}/>
+                <Input type={'email'} 
+                  placeholder={'Введите почту'}
+                  small_text={''}
+                  label={''}
+                  class_name={'log-in__input'}
+                  onInputChange={this.onEmailChange}/>
 
-              <Input type={'password'} 
-                placeholder={'Введите пароль'}
-                small_text={''}
-                label={''}
-                class_name={'log-in__input'}
-                onInputChange={this.onPasswordChange}/>
+                <Input type={'password'} 
+                  placeholder={'Введите пароль'}
+                  small_text={''}
+                  label={''}
+                  class_name={'log-in__input'}
+                  onInputChange={this.onPasswordChange}/>
 
-              <button type="submit" className="log-in__enter-button btn" onClick={(e) => this.singIn(e)}>ЗАЙТИ</button>
-            </fieldset>
-          </form>
+                <button type="submit" className="log-in__enter-button btn" onClick={(e) => this.singIn(e)}>ЗАЙТИ</button>
+              </fieldset>
+            </form>
+          </div>
         </div>
       </div>
     );
