@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { aboutLoaded } from './../../actions';
 
 import { AboutItem } from './item';
+import { Loader } from './../loader';
 
 //import PropTypes from 'prop-types';
 //import _ from 'lodash';
@@ -16,7 +17,7 @@ const About = () => {
 
   if (_.isEmpty(about_data)) {
     dispatch(aboutLoaded());
-    return <div className="loader sign-out">loading...</div>;
+    return <Loader />;
   } 
   return(
     <section className="about">

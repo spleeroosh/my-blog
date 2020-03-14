@@ -7,6 +7,7 @@ import { authUser, signOut, updateUser } from './../../actions';
 import { connect } from 'react-redux';
 
 import { Input } from './../custom_fields/input';
+import { Loader } from './../loader';
 
 class LogInForm extends Component {
   constructor() {
@@ -14,7 +15,8 @@ class LogInForm extends Component {
     
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      signing: false
     };
     
     this.onEmailChange = this.onEmailChange.bind(this);
@@ -46,16 +48,30 @@ class LogInForm extends Component {
     const { dispatch } = this.props,
       { email, password } = this.state;
 
+    this.setState({
+      signing: true
+    });
+
     dispatch(authUser(email, password));
   }
 
   signOut() {
     const { dispatch } = this.props;
+
+    this.setState({
+      signing: false
+    });
+
     dispatch(signOut());
   }
 
   render() {
     const { user } = this.props;
+    const { signing } = this.state;
+
+    if (signing && _.isEmpty(user)) {
+      return <Loader />;
+    }
     
     // Если пользователь авторизован, заменяем форму логина на возможность выхода
     if (!_.isEmpty(user)) {

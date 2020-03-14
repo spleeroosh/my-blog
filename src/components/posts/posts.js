@@ -7,6 +7,7 @@ import { removePost, postsLoaded, updateUser } from './../../actions';
 
 import AddPost from '../add-post';
 import Post from './post';
+import { Loader } from './../loader';
 
 class Posts extends Component {
   /**
@@ -61,31 +62,33 @@ class Posts extends Component {
   render() {
     const { posts, user, posts_filter } = this.props,
       { onDeletePost } = this,
-      loading = <div className="sign-out loader">loading...</div>;
+      Spinner = <Loader />;
     let PostsComponent,
       filtered_posts;
-    
+
     if (!_.isEmpty(posts)) {
       filtered_posts = this.filterPosts(posts, posts_filter);
 
       PostsComponent = (
-        <section className="posts container">
-          {_.map(filtered_posts, post => (
-            <Post
-              post={post}
-              user={user}
-              onDeletePost={onDeletePost}
-              key={post['id']}
-            />
-          ))}
-        </section>
+        <React.Fragment>
+          <section className="posts container">
+            {_.map(filtered_posts, post => (
+              <Post
+                post={post}
+                user={user}
+                onDeletePost={onDeletePost}
+                key={post['id']}
+              />
+            ))}
+          </section>
+          <AddPost />
+        </React.Fragment>
       );
     }
 
     return (
       <React.Fragment>
-        {posts.length ? PostsComponent : loading}
-        <AddPost />
+        {posts.length ? PostsComponent : Spinner}
       </React.Fragment>
     );
   }
