@@ -1,20 +1,28 @@
 .posts {
   width: $desc-max-width;
-  margin-top: $section-top-margin;
-  margin-bottom: 3rem;
+  height: 100%;
+  padding-top: $section-top-margin;
+  padding-bottom: $section-top-margin;
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
 
   &__list {
     list-style: none;
+
+    & a {
+      color: initial;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   &__item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    cursor: pointer;
   }
 
   @media screen and (max-width: $mobile-resolution) {

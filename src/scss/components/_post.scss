@@ -39,6 +39,10 @@
     margin: 0;
     padding-bottom: .5rem;
 
+    &:hover {
+      color: $color-tertiary;
+    }
+
   }
 
   &__date {

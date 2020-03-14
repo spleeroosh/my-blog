@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Link, Switch,  Route } from 'react-router-dom';
+import { Switch,  Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { removePost, postsLoaded, updateUser } from './../../actions';
 
 import AddPost from '../add-post';
 import Post from './post';
-import {PostItem} from './post_item';
+import { PostsList } from './posts_list';
 import { Loader } from './../loader';
+import getPropsHoc from './../hoc-helpers/get_props_hoc';
 
 class Posts extends Component {
   /**
@@ -62,10 +63,9 @@ class Posts extends Component {
   }
 
   prepareText = ({ text, to_link }) => {
-    if (to_link) {
-      return text.replace(/&nbsp;/g, '-').toLowerCase();
-    }
-    return text.replace(/&nbsp;/g, ' ');
+    return to_link ? 
+      text.replace(/&nbsp;/g, '-').toLowerCase() : 
+      text.replace(/&nbsp;/g, ' ');
   }
 
   render() {
@@ -73,7 +73,7 @@ class Posts extends Component {
       { onDeletePost, prepareText } = this,
       Spinner = Loader;
     let PostsListComponent,
-      Posts,
+      PostSwitcher,
       filtered_posts;
 
     if (!_.isEmpty(posts)) {
@@ -81,43 +81,29 @@ class Posts extends Component {
 
       PostsListComponent = () => (
         <React.Fragment>
-
-          <ul className="posts__list">
-            {_.map(filtered_posts, post => (
-              <Link to={`/blog/${prepareText({ text: post.title, to_link: true })}`}>
-                <PostItem
-                  post={post}
-                  user={user}
-                  onDeletePost={onDeletePost}
-                  key={post['id']}
-                  setClassName={'posts__item'}
-                />
-              </Link>
-            ))}
-          </ul>
-
+          <PostsList filtered_posts={filtered_posts} 
+            prepareText={prepareText} 
+            onDeletePost={onDeletePost} 
+            user={user} />
           <AddPost />
         </React.Fragment>
-      );      
+      );
     }
 
-    Posts = () => {
+    PostSwitcher = () => {
       return (
         <Switch>
           <Route exact path='/blog' component={posts.length ? PostsListComponent : Spinner} /> 
           {posts.length ? _.map(filtered_posts, post => {
-            let CustomPost = () => {
-              return <Post
-                post={post}
-                user={user}
-                onDeletePost={onDeletePost}
-                key={post['id']}
-                setClassName={'posts__item'}
-              />;
+            const props = {
+              post,
+              user,
+              onDeletePost,
+              key: post.id,
+              setClassName: 'post__item'
             };
-            console.log(prepareText({ text: post.title, to_link: true }), CustomPost);
             
-            return <Route exact path={`/blog/${prepareText({ text: post.title, to_link: true })}`} component={CustomPost}></Route>;
+            return <Route exact path={`/blog/${prepareText({ text: post.title, to_link: true })}`} component={getPropsHoc(Post)(props)}></Route>;
           }) : null }
         </Switch>
       );
@@ -126,7 +112,7 @@ class Posts extends Component {
     return (
       <React.Fragment>
         <section className="posts container">
-          <Posts />
+          <PostSwitcher />
         </section>
       </React.Fragment>
     );
