@@ -2,15 +2,8 @@
   content: '';
   position: absolute;
   bottom: 0;
-  width: 45rem;
+  width: 20rem;
   height: 1px;
   border-bottom: solid 1px silver;
-  left: 50%;
-  transform: translateX(-50%);
-
-  @media screen and (max-width: $mobile-resolution) {
-    width: 20rem;
-    left: 0;
-    transform: translateX(0);
-  }
+  left: 0;
 }
