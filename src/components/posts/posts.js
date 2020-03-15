@@ -10,6 +10,7 @@ import AddPost from '../add-post';
 import Post from './post';
 import { PostsList } from './posts_list';
 import { Loader } from './../loader';
+import { Welcome } from './../welcome';
 import getPropsHoc from './../hoc-helpers/get_props_hoc';
 
 class Posts extends Component {
@@ -81,6 +82,7 @@ class Posts extends Component {
 
       PostsListComponent = () => (
         <React.Fragment>
+          <Welcome />
           <PostsList filtered_posts={filtered_posts} 
             prepareText={prepareText} 
             onDeletePost={onDeletePost} 
