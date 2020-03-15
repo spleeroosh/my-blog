@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: 10rem auto;
   grid-gap: 1.5rem;
+  align-items: center;
 
   &__text {
     border-radius: 9px;
