@@ -2,9 +2,7 @@ const init_state = {
   count: 0,
   posts: [],
   about: {},
-  user: {
-    id: false
-  },
+  user: null,
   is_searchbar: false,
   is_shownav: false
 };

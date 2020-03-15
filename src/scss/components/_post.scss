@@ -1,8 +1,4 @@
 .post {
-  &::after {
-    @include dividing_strip;
-  }
-
   background-color: $color-primary;
   color: $color-secondary;
   padding: 0;
@@ -15,10 +11,6 @@
     width: 100%;
     padding-bottom: .5rem;
     align-items: flex-start;
-
-    &::after {
-      @include dividing_strip;
-    }
   }
 
   &__content {
@@ -38,16 +30,13 @@
     width: 100%;
     margin: 0;
     padding-bottom: .5rem;
-
-    &:hover {
-      color: $color-tertiary;
-    }
-
+    font-weight: 900;
+    color: $color-tertiary;
   }
 
   &__date {
-    font-size: .8rem;
-    color: $color-border;
+    font-size: .9rem;
+    color: $color-secondary;
     margin: 0;
   }
 

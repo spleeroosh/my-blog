@@ -72,7 +72,13 @@ class Posts extends Component {
   render() {
     const { posts, user, posts_filter } = this.props,
       { onDeletePost, prepareText } = this,
-      Spinner = Loader;
+      Spinner = () => (
+        <React.Fragment>
+          <Welcome />
+          <Loader />
+          <AddPost />
+        </React.Fragment>
+      );
     let PostsListComponent,
       PostSwitcher,
       filtered_posts;
