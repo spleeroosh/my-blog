@@ -72,10 +72,10 @@ class AddPost extends Component {
    * @returns {Object} Возвращаем объект с отформатированным заголовком, и текстом
    */
   formattedText(title, content) {
-    const formattedTitle = title.replace(/ /g, '&nbsp;'),
-      formattedContent = content.replace(/ /g, '&nbsp;')
-        .replace(/\n/g, '<br />')
-        .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
+    const formattedTitle = title,//.replace(/ /g, '&nbsp;'),
+      formattedContent = content; //.replace(/ /g, '&nbsp;')
+        //.replace(/\n/g, '<br />')
+        //.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'); 
     return {
       formattedTitle,
       formattedContent
