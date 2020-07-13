@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "..\\devino\\devino-business-chat"
+    },
+    {
+      "path": "..\\suspense"
+    },
+    {
+      "path": "..\\playgrounds\\css-mixins-variables"
+    },
+    {
+      "path": "..\\learning\\devconnector"
+    },
+    {
+      "path": "..\\devino\\devino.chat"
+    }
+  ]
+}
